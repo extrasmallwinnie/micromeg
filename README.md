@@ -35,7 +35,14 @@ pak::pak("extrasmallwinnie/micromeg")
 
 ## Example
 
-Basic usage:
+First, load in some example data to get an idea for the format of what’s
+expected.
+
+I’ve made up an example study where nasal swabs were taken from people
+who were either “healthy” or “sick” at the time of sampling. We’ve
+collected their health status, their age at collection, sex, and
+location (rural or urban). Let’s load it into our session as an object
+called “metadata”:
 
 ``` r
 library(micromeg)
