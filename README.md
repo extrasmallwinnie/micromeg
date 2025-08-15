@@ -117,6 +117,3 @@ during the dada2 workflow, and must match the ASV table.
     #> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
     #> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
     #> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.

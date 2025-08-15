@@ -72,10 +72,11 @@ asvtable
 
 Finally, let's load in the example taxonomy file. This was generated during the dada2 workflow, and must match the ASV table.
 
-```{r pressure, echo = FALSE}
+```{r taxaexample, echo = FALSE}
+
 taxa <- makeExampleTaxa()
 
 taxa
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+
