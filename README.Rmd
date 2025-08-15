@@ -72,7 +72,7 @@ asvtable
 
 Finally, let's load in the example taxonomy file. This was generated during the dada2 workflow, and must match the ASV table.
 
-```{r taxaexample, echo = FALSE}
+```{r taxaexample}
 
 taxa <- makeExampleTaxa()
 

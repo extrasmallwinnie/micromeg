@@ -105,15 +105,21 @@ asvtable
 Finally, let’s load in the example taxonomy file. This was generated
 during the dada2 workflow, and must match the ASV table.
 
-    #> # A tibble: 9 × 8
-    #>   ASV   Kingdom  Phylum         Class               Order   Family Genus Species
-    #>   <chr> <chr>    <chr>          <chr>               <chr>   <chr>  <chr> <chr>  
-    #> 1 ASV1  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-    #> 2 ASV2  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Prev… melani…
-    #> 3 ASV3  Bacteria Firmicutes     Bacilli             Staphy… Staph… Stap… <NA>   
-    #> 4 ASV4  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-    #> 5 ASV5  Bacteria Firmicutes     Bacilli             Lactob… Strep… Stre… <NA>   
-    #> 6 ASV6  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… rava   
-    #> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
-    #> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
-    #> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
+``` r
+
+taxa <- makeExampleTaxa()
+
+taxa
+#> # A tibble: 9 × 8
+#>   ASV   Kingdom  Phylum         Class               Order   Family Genus Species
+#>   <chr> <chr>    <chr>          <chr>               <chr>   <chr>  <chr> <chr>  
+#> 1 ASV1  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
+#> 2 ASV2  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Prev… melani…
+#> 3 ASV3  Bacteria Firmicutes     Bacilli             Staphy… Staph… Stap… <NA>   
+#> 4 ASV4  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
+#> 5 ASV5  Bacteria Firmicutes     Bacilli             Lactob… Strep… Stre… <NA>   
+#> 6 ASV6  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… rava   
+#> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
+#> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
+#> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
+```
