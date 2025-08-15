@@ -64,8 +64,10 @@ In this made up example, we did 16S sequencing targeting the V4 region (followin
 
 Next, let's load in the example [ASV table](https://benjjneb.github.io/dada2/). (N.B.: Any sort of data in tabular format similar to the sample **should** work, but no guarantees.)
 
-```{r cars}
-summary(cars)
+```{r asvexample}
+asvtable <- makeExampleSeqtab()
+
+asvtable
 ```
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
