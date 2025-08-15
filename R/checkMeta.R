@@ -5,6 +5,7 @@
 #'
 #' @returns Returns warnings or errors with your metadata object that may cause downstream problems.
 #' @export
+#' @import tibble
 #'
 #' @examples
 #' metadata <- data.frame(
