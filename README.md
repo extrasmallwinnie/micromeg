@@ -25,7 +25,7 @@ pak::pak("extrasmallwinnie/micromeg")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Basic usage:
 
 ``` r
 library(micromeg)
