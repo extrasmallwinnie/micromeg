@@ -18,7 +18,13 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of micromeg is to share convenience wrappers I use frequently for microbiome data analysis and processing. This package does not create anything new and is built on the great work of others. Many of the functions it provides already exist in other packages, such as [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html).
+The goal of micromeg is to document share convenience functions I use frequently for microbiome data analysis and processing. This package does not create anything new and is built on the great work of others. Many of the functions it provides already exist in other packages. [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html) is one such example of an R package that provides many tools for analysis of microbiome data; it is very well-documented and so may be better for your purposes.    
+Other R packages heavily used here include:
+1. tidyverse
+2. vegan
+
+
+
 
 ## Installation
 
