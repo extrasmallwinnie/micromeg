@@ -11,5 +11,5 @@
 #'
 
 filtering <- function(seqtab, minDepth, minASVCount){
-  seqtab %>% dplyr::rowwise() %>% dplyr::mutate("row.sum" = sum(dplyr::c_across(where(is.numeric)))) %>% dplyr::filter(seqtab$row.sum > minDepth) %>% dplyr::select(-c("row.sum")) %>% dplyr::select(c("X", where(~ is.numeric(.) && sum(.) >= minASVCount))) %>% dplyr::rename("SampleID" = "X")
+  seqtab %>% dplyr::rowwise() %>% dplyr::mutate("row.sum" = sum(dplyr::c_across(where(is.numeric)))) %>% dplyr::filter(row.sum > minDepth) %>% dplyr::select(-c("row.sum")) %>% dplyr::select(c("X", where(~ is.numeric(.) && sum(.) >= minASVCount))) %>% dplyr::rename("SampleID" = "X") %>% ungroup()
 }
