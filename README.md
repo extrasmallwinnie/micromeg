@@ -123,3 +123,15 @@ taxa
 #> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
 #> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
 ```
+
+BTW, the function makeExample() also exists for your convenience and
+will call upon any of the above, like so:
+
+``` r
+
+metadata <- makeExample("meta")
+asvtable <- makeExample("asv")
+taxa <- makeExample("taxa")
+```
+
+Now that we’ve loaded in our metadata file, we can check it:

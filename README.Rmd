@@ -79,4 +79,18 @@ taxa <- makeExampleTaxa()
 taxa
 ```
 
+BTW, the function makeExample() also exists for your convenience and will call upon any of the above, like so:
+
+```{r allexample}
+
+metadata <- makeExample("meta")
+asvtable <- makeExample("asv")
+taxa <- makeExample("taxa")
+
+```
+
+Now that we've loaded in our metadata file, we can check it:
+
+```{r metacheck}
+```
 
