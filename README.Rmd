@@ -92,5 +92,7 @@ taxa <- makeExample("taxa")
 Now that we've loaded in our metadata file, we can check it:
 
 ```{r metacheck}
+checkMeta(metadata)
+
 ```
 
