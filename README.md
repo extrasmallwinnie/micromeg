@@ -19,7 +19,9 @@ for your purposes.
 
 Other R packages heavily used here include:  
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem  
-2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
+2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html) 3.
+[dada2](https://benjjneb.github.io/dada2/) 4.
+[maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 ## Installation
 
@@ -38,26 +40,19 @@ Basic usage:
 ``` r
 library(micromeg)
 
-## Check your metadata file for potential errors and problems with checkMeta():
+metadata <- makeExampleMeta()
 
-# Start with a toy example:
-dplyr::band_members
-#> # A tibble: 3 × 2
-#>   name  band   
-#>   <chr> <chr>  
-#> 1 Mick  Stones 
-#> 2 John  Beatles
-#> 3 Paul  Beatles
-
-# If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should 
-# get no warnings or errors as every name is unique:
-checkMeta(dplyr::band_members, "name")
-#> No problems were detected with your metadata file.
-
-# However, if we were to use "band" as our "Sample ID", we would get an error because not every entry in band is unique, so it can't function as a valid sample ID:
-#checkMeta(dplyr::band_members, "band")
-# Error in tryCatchList(expr, classes, parentenv, handlers) : 
-#  You indicated the variable to use for the sample IDs was band. However, these are not all unique. All sample IDs # must be unique. Your duplicated sample IDs were: Beatles
+metadata
+#> # A tibble: 7 × 5
+#>   SampleID HealthStatus   Age Sex    Location
+#>   <chr>    <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1      healthy         48 female <NA>    
+#> 2 HC2      healthy         32 male   urban   
+#> 3 HC3      healthy         24 female urban   
+#> 4 Sick1    sick            42 male   rural   
+#> 5 Sick2    sick            50 male   urban   
+#> 6 Sick3    sick            45 male   rural   
+#> 7 Sick4    sick            40 female urban
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`?

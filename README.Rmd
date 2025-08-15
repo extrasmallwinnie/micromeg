@@ -22,7 +22,9 @@ The goal of micromeg is to document and share convenience functions I personally
     
 Other R packages heavily used here include:    
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem   
-2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)   
+2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
+3. [dada2](https://benjjneb.github.io/dada2/)
+4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)   
 
 
 
@@ -40,22 +42,12 @@ pak::pak("extrasmallwinnie/micromeg")
 
 Basic usage:
 
-```{r example}
+```{r examplemeta}
 library(micromeg)
 
-## Check your metadata file for potential errors and problems with checkMeta():
+metadata <- makeExampleMeta()
 
-# Start with a toy example:
-dplyr::band_members
-
-# If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should 
-# get no warnings or errors as every name is unique:
-checkMeta(dplyr::band_members, "name")
-
-# However, if we were to use "band" as our "Sample ID", we would get an error because not every entry in band is unique, so it can't function as a valid sample ID:
-#checkMeta(dplyr::band_members, "band")
-# Error in tryCatchList(expr, classes, parentenv, handlers) : 
-#  You indicated the variable to use for the sample IDs was band. However, these are not all unique. All sample IDs # must be unique. Your duplicated sample IDs were: Beatles
+metadata
 
 ```
 
