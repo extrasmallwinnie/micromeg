@@ -1,6 +1,22 @@
+#' Check your metadata file to identify potential downstream issues.
+#'
+#' @param df A data frame or tibble containing your sample metadata.
+#' @param ids The column name in your data frame that identifies the sample IDs.
+#'
+#' @returns Returns warnings or errors with your metadata object that may cause downstream problems.
+#' @export
+#'
+#' @examples
+#' metadata <- data.frame(
+#'                        SampleIDs = c("Sample1", "Sample2", "Sample3"),
+#'                        Age       = c(34, 58, 21),
+#'                        Health    = c("Healthy", "Sick", NA))
+#' checkMeta(metadata, "SampleIDs")
+#'
+#'
 checkMeta <- function(df, ids = "SampleID") {
   if(!is.data.frame(df) & !tibble::is_tibble(df)) {
-    warning("Your metadata object is not a data frame or tibble. There may be unexpected downstream issues. It is recommended you convert your metadata object to a data frame or a tibble before proceeding. Try as.data.frame() or tibble::as_tibble() and check if your data still looks as expected.")
+    warning("R does not recognize your metadata object as either a data frame or tibble. There may be unexpected downstream issues. It is recommended you convert your metadata object to a data frame or a tibble before proceeding. E.g., try as.data.frame() or tibble::as_tibble() and check if your data still looks as expected.")
   }
 
   if(!ids%in% colnames(df)) {
