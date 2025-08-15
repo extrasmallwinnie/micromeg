@@ -12,8 +12,6 @@
 #'                        Age       = c(34, 58, 21),
 #'                        Health    = c("Healthy", "Sick", NA))
 #' checkMeta(metadata, "SampleIDs")
-#'
-#'
 checkMeta <- function(df, ids = "SampleID") {
   if(!is.data.frame(df) & !tibble::is_tibble(df)) {
     warning("R does not recognize your metadata object as either a data frame or tibble. There may be unexpected downstream issues. It is recommended you convert your metadata object to a data frame or a tibble before proceeding. E.g., try as.data.frame() or tibble::as_tibble() and check if your data still looks as expected.")

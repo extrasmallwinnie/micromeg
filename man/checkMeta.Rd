@@ -23,6 +23,4 @@ metadata <- data.frame(
                        Age       = c(34, 58, 21),
                        Health    = c("Healthy", "Sick", NA))
 checkMeta(metadata, "SampleIDs")
-
-
 }
