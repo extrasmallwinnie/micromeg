@@ -25,7 +25,7 @@ pak::pak("extrasmallwinnie/micromeg")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+Basic usage:
 
 ``` r
 library(micromeg)
@@ -44,7 +44,6 @@ dplyr::band_members
 # If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should get no warnings or errors as every name is unique:
 checkMeta(dplyr::band_members, "name")
 #> No problems were detected with your metadata file.
-# No problems were detected with your metadata file.
 
 # However, if we were to use "band" as our "Sample ID", we would get an error because not every entry in band is unique, so it can't function as a valid sample ID:
 #checkMeta(dplyr::band_members, "band")
