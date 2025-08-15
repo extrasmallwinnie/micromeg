@@ -19,7 +19,9 @@ for your purposes.
 
 Other R packages heavily used here include:  
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem  
-2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
+2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html) 3.
+[dada2](https://benjjneb.github.io/dada2/) 4.
+[maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 ## Installation
 
