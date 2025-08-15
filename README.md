@@ -62,8 +62,25 @@ metadata
 #> 7 Sick4    sick            40 female urban
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
+sounds like, and it must be unique, and it must match your sequencing
+data.
+
+In this made up example, we did 16S sequencing targeting the V4 region
+(following [this
+protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
+nasal swabs, then processed the specimens through the
+[dada2](https://benjjneb.github.io/dada2/) pipeline. The output we get
+from dada2 is:
+
+1.  An[ASV (amplicon sequencing variant)
+    table](https://benjjneb.github.io/dada2/).  
+2.  Its associated taxonomy table.
+
+Next, let’s load in the example [ASV
+table](https://benjjneb.github.io/dada2/). (N.B.: Any sort of data in
+tabular format similar to the sample **should** work, but no
+guarantees.)
 
 ``` r
 summary(cars)
