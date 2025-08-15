@@ -19,9 +19,9 @@ for your purposes.
 
 Other R packages heavily used here include:  
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem  
-2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html) 3.
-[dada2](https://benjjneb.github.io/dada2/) 4.
-[maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
+2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)  
+3. [dada2](https://benjjneb.github.io/dada2/)  
+4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 ## Installation
 
@@ -62,9 +62,11 @@ metadata
 #> 7 Sick4    sick            40 female urban
 ```
 
-The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
-sounds like, and it must be unique, and it must match your sequencing
-data.
+This metadata object is a tibble (because I personally like the
+[tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames
+should also be fine to use. The “SampleID” field hasn’t been discussed
+yet, but it’s exactly what it sounds like, and it must be unique, and it
+must match your sequencing data.
 
 In this made up example, we did 16S sequencing targeting the V4 region
 (following [this
