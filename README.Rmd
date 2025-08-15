@@ -35,7 +35,21 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(micromeg)
-## basic example code
+
+## Check your metadata file for potential errors and problems with checkMeta():
+
+# dplyr supplies useful tibbles for us to use for testing. The object dplyr::band_members is a tibble with some well known people, and includes their first name and the band they're known for. View it in the console below:
+dplyr::band_members
+
+# If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should get no warnings or errors as every name is unique:
+checkMeta(dplyr::band_members, "name")
+# No problems were detected with your metadata file.
+
+# However, if we were to use "band" as our "Sample ID", we would get an error because not every entry in band is unique, so it can't function as a valid sample ID:
+#checkMeta(dplyr::band_members, "band")
+# Error in tryCatchList(expr, classes, parentenv, handlers) : 
+#  You indicated the variable to use for the sample IDs was band. However, these are not all unique. All sample IDs # must be unique. Your duplicated sample IDs were: Beatles
+
 ```
 
 What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:

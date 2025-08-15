@@ -14,7 +14,7 @@
 #'                        Health    = c("Healthy", "Sick", NA))
 #' checkMeta(metadata, "SampleIDs")
 checkMeta <- function(df, ids = "SampleID") {
-  if(!is.data.frame(df) & !tibble::is_tibble(df)) {
+  tryCatch({if(!is.data.frame(df) & !tibble::is_tibble(df)) {
     warning("R does not recognize your metadata object as either a data frame or tibble. There may be unexpected downstream issues. It is recommended you convert your metadata object to a data frame or a tibble before proceeding. E.g., try as.data.frame() or tibble::as_tibble() and check if your data still looks as expected.")
   }
 
@@ -31,4 +31,6 @@ checkMeta <- function(df, ids = "SampleID") {
   if(sum(!stats::complete.cases(df)) > 0) {
     warning(sprintf("As least 1 NA or empty cell was detected in %s sample(s) in your metadata object. This is not necessarily bad or wrong, but if you were not expecting this, check your metadata object again. Sample(s) %s were detected to have NAs or empty cells.", sum(!stats::complete.cases(df)), paste0(df[!stats::complete.cases(df),][[ids]], collapse=", ")))
   }
+  message("No problems were detected with your metadata file.")
+  })
 }
