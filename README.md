@@ -64,9 +64,11 @@ metadata
 
 This metadata object is a tibble (because I personally like the
 [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames
-should also be fine to use. The “SampleID” field hasn’t been discussed
-yet, but it’s exactly what it sounds like, and it must be unique, and it
-must match your sequencing data.
+should also be fine to use.
+
+The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
+sounds like, and it must be unique, and it must match your sequencing
+data.
 
 In this made up example, we did 16S sequencing targeting the V4 region
 (following [this
@@ -75,7 +77,7 @@ nasal swabs, then processed the specimens through the
 [dada2](https://benjjneb.github.io/dada2/) pipeline. The output we get
 from dada2 is:
 
-1.  An[ASV (amplicon sequencing variant)
+1.  An [ASV (amplicon sequencing variant)
     table](https://benjjneb.github.io/dada2/).  
 2.  Its associated taxonomy table.
 
