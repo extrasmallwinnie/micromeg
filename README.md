@@ -138,9 +138,8 @@ Now that we’ve loaded in our metadata file, we can check it:
 
 ``` r
 checkMeta(metadata)
-#> Warning in tryCatchList(expr, classes, parentenv, handlers): As least 1 NA or
-#> empty cell was detected in 1 sample(s) in your metadata object. This is not
-#> necessarily bad or wrong, but if you were not expecting this, check your
-#> metadata object again. Sample(s) HC1 were detected to have NAs or empty cells.
-#> No problems were detected with your metadata file.
+#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 1
+#> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
+#> you were not expecting this, check your metadata object again. Sample(s) HC1
+#> were detected to have NAs or empty cells.
 ```
