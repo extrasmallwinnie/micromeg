@@ -7,15 +7,19 @@
 
 <!-- badges: end -->
 
-The goal of micromeg is to document share convenience functions I use
-frequently for microbiome data analysis and processing. This package
-does not create anything new and is built on the great work of others.
-Many of the functions it provides already exist in other packages.
+The goal of micromeg is to document and share convenience functions I
+personally use frequently for microbiome data analysis and processing.
+This package does not create anything new and is built on the great work
+of others. Many of the functions it provides already exist in other
+packages. For example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
-is one such example of an R package that provides many tools for
-analysis of microbiome data; it is very well-documented and so may be
-better for your purposes.  
-Other R packages heavily used here include: 1. tidyverse 2. vegan
+provides many tools for analysis of microbiome data; it is very
+well-documented, heavily used (I use it myself!) and so may be better
+for your purposes.
+
+Other R packages heavily used here include:  
+1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem  
+2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 
 ## Installation
 
