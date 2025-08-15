@@ -102,10 +102,8 @@ asvtable
 #> 7 Sick4        1     2     0     5     1     0     0     0     1
 ```
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
+Finally, let’s load in the example taxonomy file. This was generated
+during the dada2 workflow, and must match the ASV table.
 
 In that case, don’t forget to commit and push the resulting figure
 files, so they display on GitHub and CRAN.
