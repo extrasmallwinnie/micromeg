@@ -32,7 +32,7 @@ library(micromeg)
 
 ## Check your metadata file for potential errors and problems with checkMeta():
 
-# dplyr supplies useful tibbles for us to use for testing. The object dplyr::band_members is a tibble with some well known people, and includes their first name and the band they're known for. View it in the console below:
+# Start with a toy example:
 dplyr::band_members
 #> # A tibble: 3 × 2
 #>   name  band   
@@ -41,7 +41,8 @@ dplyr::band_members
 #> 2 John  Beatles
 #> 3 Paul  Beatles
 
-# If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should get no warnings or errors as every name is unique:
+# If we run checkMeta, and we're going to use column "name" as our "Sample ID", we should 
+# get no warnings or errors as every name is unique:
 checkMeta(dplyr::band_members, "name")
 #> No problems were detected with your metadata file.
 
