@@ -89,6 +89,26 @@ taxa <- makeExample("taxa")
 
 ```
 
+You can be even more lazy and make all three tibble at once:
+
+```{r allexample2}
+
+all <- makeExample()
+
+# OR
+
+all <- makeExample("all")
+
+all
+
+# Object "all" is a list, so, for example you can access (and assign, if you want) each tibble with the $ operator:
+
+metadata <- all$metadata
+asvtable <- all$asvtable
+taxa     <- all$taxa
+
+```
+
 Now that we've loaded in our metadata file, we can check it:
 
 ```{r metacheck}

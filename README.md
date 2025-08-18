@@ -134,6 +134,62 @@ asvtable <- makeExample("asv")
 taxa <- makeExample("taxa")
 ```
 
+You can be even more lazy and make all three tibble at once:
+
+``` r
+
+all <- makeExample()
+
+# OR
+
+all <- makeExample("all")
+
+all
+#> $metadata
+#> # A tibble: 7 × 5
+#>   SampleID HealthStatus   Age Sex    Location
+#>   <chr>    <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1      healthy         48 female <NA>    
+#> 2 HC2      healthy         32 male   urban   
+#> 3 HC3      healthy         24 female urban   
+#> 4 Sick1    sick            42 male   rural   
+#> 5 Sick2    sick            50 male   urban   
+#> 6 Sick3    sick            45 male   rural   
+#> 7 Sick4    sick            40 female urban   
+#> 
+#> $asvtable
+#> # A tibble: 7 × 10
+#>   SampleID  ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
+#>   <chr>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 HC1       1856 11652 13681  2994  9111  3995 10821  3937     4
+#> 2 HC2      25732  4775  2902  1628  1061 13536  6216  4089     6
+#> 3 HC3       3385  6760  6184   569  7081  8358  8780  2907     8
+#> 4 Sick1    29939 26217 18965  4483  3018   217  1599 12441     6
+#> 5 Sick2    29954 16142  9656  9373  3221  9506  4237   294     6
+#> 6 Sick3    29724  2771 26380  7803  8003  8157 13010  8469     7
+#> 7 Sick4        1     2     0     5     1     0     0     0     1
+#> 
+#> $taxa
+#> # A tibble: 9 × 8
+#>   ASV   Kingdom  Phylum         Class               Order   Family Genus Species
+#>   <chr> <chr>    <chr>          <chr>               <chr>   <chr>  <chr> <chr>  
+#> 1 ASV1  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
+#> 2 ASV2  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Prev… melani…
+#> 3 ASV3  Bacteria Firmicutes     Bacilli             Staphy… Staph… Stap… <NA>   
+#> 4 ASV4  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
+#> 5 ASV5  Bacteria Firmicutes     Bacilli             Lactob… Strep… Stre… <NA>   
+#> 6 ASV6  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… rava   
+#> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
+#> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
+#> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
+
+# Object "all" is a list, so, for example you can access (and assign, if you want) each tibble with the $ operator:
+
+metadata <- all$metadata
+asvtable <- all$asvtable
+taxa     <- all$taxa
+```
+
 Now that we’ve loaded in our metadata file, we can check it:
 
 ``` r
