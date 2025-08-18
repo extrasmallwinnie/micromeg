@@ -120,6 +120,14 @@ checkMeta(metadata)
 
 ```
 
+You'll see there's a warning that NAs were detected in the metadata table. This is not bad or wrong, and it's OK to have NAs! The warning is there to check with you that you were expecting to see some missing data. If you weren't check that your metadata object was loaded in correctly.    
+
+In this case, there are NAs in a few spots:
+
+1. Demographic data is missing for the lab positive and negative controls, as that kind of information not relevant for those samples.    
+2. Location is missing for the participant that sample "HC1" was taken from. Let's say that the participant declined to share their location, so that's why it's missing from our data.
+
+
 ___
 
 
@@ -134,6 +142,6 @@ As mentioned above, I could not have created this without the benefit of what ot
 * [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 * [tidyverse](https://tidyverse.tidyverse.org), especially [dplyr](https://dplyr.tidyverse.org) and [ggplot2](https://ggplot2.tidyverse.org)
 * [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
-* Suite from Dr. Frank Harrell, especially [rms](https://cran.r-project.org/web/packages/rms/index.html) and [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).   
+* [Suite from Dr. Frank Harrell](https://hbiostat.org), especially [rms](https://cran.r-project.org/web/packages/rms/index.html) and [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).   
 
 More acknowledgements and more details to be added later

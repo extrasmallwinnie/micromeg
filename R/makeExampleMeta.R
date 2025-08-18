@@ -7,6 +7,7 @@
 #' metadata <- makeExampleMeta()
 makeExampleMeta <- function(){
   tibble::tibble(SampleID=c("HC1", "HC2", "HC3", "Sick1", "Sick2", "Sick3", "Sick4", "NegControl1", "PosControl1"),
+                 SampleType=c("nasal swab", "nasal swab", "nasal swab", "nasal swab", "nasal swab", "nasal swab", "nasal swab", "negative control", "positive control"),
                  HealthStatus=c("healthy", "healthy", "healthy", "sick", "sick", "sick", "sick", NA, NA),
                  Age=c(48, 32, 24, 42, 50, 45, 40, NA, NA),
                  Sex=c("female", "male", "female", "male", "male", "male", "female", NA, NA),

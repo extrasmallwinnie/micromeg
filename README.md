@@ -60,18 +60,18 @@ library(micromeg)
 metadata <- makeExampleMeta()
 
 metadata
-#> # A tibble: 9 × 5
-#>   SampleID    HealthStatus   Age Sex    Location
-#>   <chr>       <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1         healthy         48 female <NA>    
-#> 2 HC2         healthy         32 male   urban   
-#> 3 HC3         healthy         24 female urban   
-#> 4 Sick1       sick            42 male   rural   
-#> 5 Sick2       sick            50 male   urban   
-#> 6 Sick3       sick            45 male   rural   
-#> 7 Sick4       sick            40 female urban   
-#> 8 NegControl1 <NA>            NA <NA>   <NA>    
-#> 9 PosControl1 <NA>            NA <NA>   <NA>
+#> # A tibble: 9 × 6
+#>   SampleID    SampleType       HealthStatus   Age Sex    Location
+#>   <chr>       <chr>            <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1         nasal swab       healthy         48 female <NA>    
+#> 2 HC2         nasal swab       healthy         32 male   urban   
+#> 3 HC3         nasal swab       healthy         24 female urban   
+#> 4 Sick1       nasal swab       sick            42 male   rural   
+#> 5 Sick2       nasal swab       sick            50 male   urban   
+#> 6 Sick3       nasal swab       sick            45 male   rural   
+#> 7 Sick4       nasal swab       sick            40 female urban   
+#> 8 NegControl1 negative control <NA>            NA <NA>   <NA>    
+#> 9 PosControl1 positive control <NA>            NA <NA>   <NA>
 ```
 
 This metadata object is a tibble (because I personally like the
@@ -165,18 +165,18 @@ all <- makeExample("all")
 
 all
 #> $metadata
-#> # A tibble: 9 × 5
-#>   SampleID    HealthStatus   Age Sex    Location
-#>   <chr>       <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1         healthy         48 female <NA>    
-#> 2 HC2         healthy         32 male   urban   
-#> 3 HC3         healthy         24 female urban   
-#> 4 Sick1       sick            42 male   rural   
-#> 5 Sick2       sick            50 male   urban   
-#> 6 Sick3       sick            45 male   rural   
-#> 7 Sick4       sick            40 female urban   
-#> 8 NegControl1 <NA>            NA <NA>   <NA>    
-#> 9 PosControl1 <NA>            NA <NA>   <NA>    
+#> # A tibble: 9 × 6
+#>   SampleID    SampleType       HealthStatus   Age Sex    Location
+#>   <chr>       <chr>            <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1         nasal swab       healthy         48 female <NA>    
+#> 2 HC2         nasal swab       healthy         32 male   urban   
+#> 3 HC3         nasal swab       healthy         24 female urban   
+#> 4 Sick1       nasal swab       sick            42 male   rural   
+#> 5 Sick2       nasal swab       sick            50 male   urban   
+#> 6 Sick3       nasal swab       sick            45 male   rural   
+#> 7 Sick4       nasal swab       sick            40 female urban   
+#> 8 NegControl1 negative control <NA>            NA <NA>   <NA>    
+#> 9 PosControl1 positive control <NA>            NA <NA>   <NA>    
 #> 
 #> $asvtable
 #> # A tibble: 9 × 10
@@ -224,6 +224,21 @@ checkMeta(metadata)
 #> NegControl1, PosControl1 were detected to have NAs or empty cells.
 ```
 
+You’ll see there’s a warning that NAs were detected in the metadata
+table. This is not bad or wrong, and it’s OK to have NAs! The warning is
+there to check with you that you were expecting to see some missing
+data. If you weren’t check that your metadata object was loaded in
+correctly.
+
+In this case, there are NAs in a few spots:
+
+1.  Demographic data is missing for the lab positive and negative
+    controls, as that kind of information not relevant for those
+    samples.  
+2.  Location is missing for the participant that sample “HC1” was taken
+    from. Let’s say that the participant declined to share their
+    location, so that’s why it’s missing from our data.
+
 ------------------------------------------------------------------------
 
 # Acknowledgements
@@ -241,7 +256,7 @@ important:
   [dplyr](https://dplyr.tidyverse.org) and
   [ggplot2](https://ggplot2.tidyverse.org)
 - [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
-- Suite from Dr. Frank Harrell, especially
+- [Suite from Dr. Frank Harrell](https://hbiostat.org), especially
   [rms](https://cran.r-project.org/web/packages/rms/index.html) and
   [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
 
