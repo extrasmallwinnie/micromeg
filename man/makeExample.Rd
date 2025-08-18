@@ -4,7 +4,7 @@
 \alias{makeExample}
 \title{Create an example object}
 \usage{
-makeExample(what)
+makeExample(what = NULL)
 }
 \arguments{
 \item{what}{What do you want to create? Valid options are meta (for a metadata table), asv (for an ASV table), or taxa (for a taxonomy table)}

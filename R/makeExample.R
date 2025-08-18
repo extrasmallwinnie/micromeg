@@ -9,16 +9,25 @@
 #' metadata <- makeExample("meta")
 #' asvtable <- makeExample("asv")
 #' taxa     <- makeExample("taxa")
-makeExample <- function(what){
+makeExample <- function(what=NULL){
+  if(is.null(what)){
+    return(list("metadata" = makeExampleMeta(), "asvtable" = makeExampleSeqtab(), "taxa" = makeExampleTaxa()))
+  }
+  if(is.null(what) | what=="all"){
+    return(list("metadata" = makeExampleMeta(), "asvtable" = makeExampleSeqtab(), "taxa" = makeExampleTaxa()))
+  }
   if(what=="meta"){
     return(makeExampleMeta())
-  }
+    }
   if(what=="asv"){
     return(makeExampleSeqtab())
-  }
+    }
   if(what=="taxa"){
     return(makeExampleTaxa())
-  }
-  if(what != "meta" & what != "asv" & what != "taxa")
+    }
+  if(what != "meta" & what != "asv" & what != "taxa" & what != "all" & !is.null(what)){
     stop("Valide options are meta, asv, or taxa.")
+    }
 }
+
+
