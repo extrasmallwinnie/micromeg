@@ -215,13 +215,21 @@ checkMeta(metadata)
 
 # Acknowledgements
 
-As mentioned above, I could not have created this without learning from
-others’ work.
+As mentioned above, I could not have created this without the benefit of
+what others have already created. These tools below were especially
+important:
 
-- mothur.  
-- qiime.  
-- mgsat.  
-- maaslin2/3.  
-- vegan.
+- [mothur](https://mothur.org)  
+- [qiime](https://qiime2.org)  
+- [mgsat](https://github.com/andreyto/mgsat)  
+- maaslin[2](https://huttenhower.sph.harvard.edu/maaslin/)/[3](https://huttenhower.sph.harvard.edu/maaslin3/)  
+- [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
+- [tidyverse](https://tidyverse.tidyverse.org), especially
+  [dplyr](https://dplyr.tidyverse.org) and
+  [ggplot2](https://ggplot2.tidyverse.org)
+- [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
+- Suite from Dr. Frank Harrell, especially
+  [rms](https://cran.r-project.org/web/packages/rms/index.html) and
+  [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
 
 More acknowledgements and more details to be added later
