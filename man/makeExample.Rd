@@ -10,7 +10,7 @@ makeExample(what = NULL)
 \item{what}{What do you want to create? Valid options are meta (for a metadata table), asv (for an ASV table), or taxa (for a taxonomy table)}
 }
 \value{
-Either a metadata, ASV, or taxonomy table.
+Either a metadata, ASV, or taxonomy table, or a list of all three.
 }
 \description{
 Create an example object
@@ -19,4 +19,6 @@ Create an example object
 metadata <- makeExample("meta")
 asvtable <- makeExample("asv")
 taxa     <- makeExample("taxa")
+all      <- makeExample().   # OR:
+all      <- makeExample("all")
 }
