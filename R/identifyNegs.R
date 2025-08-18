@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' metadata <- makeExampleMeta()
-#' identifyNegs(metadata, "SampleType", "negative control")  # "how" can be a vector e.g., "c("negative", "neg control")
+#' identifyNegs(metadata, "SampleType", "negative control")  # "how" can be a vector e.g., "c("negative", "neg control", "negative control")
 identifyNegs <- function(df=NULL, column_to_look_in=NULL, how=NULL){
   #df$isNeg <- 0
   #df$isNeg[df[[column_to_look_in]]==how] <- 1
