@@ -21,5 +21,5 @@ Add a column to metadata object which identifies lab negative controls
 }
 \examples{
 metadata <- makeExampleMeta()
-identifyNegs(metadata, "SampleType", "negative control")
+identifyNegs(metadata, "SampleType", "negative control")  # "how" can be a vector e.g., "c("negative", "neg control")
 }
