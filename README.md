@@ -45,8 +45,9 @@ pak::pak("extrasmallwinnie/micromeg")
 ## Toy Example
 
 First, load in a very simple example to get an idea for the format of
-what’s expected and the general processing flow.  
-\### Toy Example Metadata
+what’s expected and the general processing flow.
+
+### Toy Example Metadata
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve

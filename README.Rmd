@@ -40,7 +40,10 @@ pak::pak("extrasmallwinnie/micromeg")
 
 ## Toy Example
 
-First, load in a very simple example to get an idea for the format of what's expected and the general processing flow.     
+First, load in a very simple example to get an idea for the format of what's expected and the general processing flow. 
+```{r empty}
+```
+
 ### Toy Example Metadata
      
 I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected their health status, their age at collection, sex, and simple location (rural or urban). There is also one lab negative control and one lab positive control. Let's load it into our session as an object called "metadata":
