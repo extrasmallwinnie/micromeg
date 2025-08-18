@@ -47,7 +47,7 @@ pak::pak("extrasmallwinnie/micromeg")
 First, load in a very simple example to get an idea for the format of
 what’s expected and the general processing flow.
 
-### Load and check metadata
+### Load in example data
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
@@ -87,8 +87,6 @@ your samples in your sequencing data.
 You may also notice that there’s some missing data (the NAs), which
 we’ll talk about more later.
 
-### Load and check ASV and its taxonomy data
-
 In this made up toy example, we did 16S sequencing targeting the V4
 region (following [the Kozich et al. 2013
 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
@@ -103,7 +101,7 @@ is:
 Next, let’s load in the example [ASV
 table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn’t
 necessarily strictly have to be an ASV table. Any sort of data in
-tabular format (e.g., OTU table) similar to the example **should**
+tabular format, e.g., OTU table, similar to the example **should**
 work.)
 
 ``` r
@@ -153,7 +151,7 @@ will call upon any of the above, like so:
 
 metadata <- makeExample("meta")
 asvtable <- makeExample("asv")
-taxa <- makeExample("taxa")
+taxa     <- makeExample("taxa")
 ```
 
 You can be even more lazy and make all three example tibbles (metadata,
@@ -217,6 +215,8 @@ asvtable <- all$asvtable
 taxa     <- all$taxa
 ```
 
+### Check data for potential issues.
+
 Now that we’ve loaded in our metadata file, we can check it:
 
 ``` r
@@ -241,7 +241,8 @@ In this case, there are NAs in a few spots:
     samples.  
 2.  Location is missing for the participant that sample “HC1” was taken
     from. Let’s say that the participant declined to share their
-    location, so that’s why it’s missing from our data.
+    location, so that’s why it’s missing from our data. With real life
+    data, it’s pretty normal to have some information missing.
 
 This is all fine and there are no glaring red flags with our metadata
 object.
@@ -255,11 +256,7 @@ OK, now let’s check that our ASV and taxonomy tables:
 
 ``` r
 
-checkMeta(metadata)
-#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 3
-#> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
-#> you were not expecting this, check your metadata object again. Sample(s) HC1,
-#> NegControl1, PosControl1 were detected to have NAs or empty cells.
+checkASV(asvtable, taxa, metadata)
 ```
 
 ------------------------------------------------------------------------
