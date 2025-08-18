@@ -14,7 +14,7 @@ of others. Many of the functions it provides already exist in other
 packages. For example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 provides many tools for analysis of microbiome data; it is very
-well-documented, heavily used (I use it myself!) and so may be better
+well-documented, commonly used (I use it myself!) and so may be better
 for your purposes.
 
 Other R packages heavily used here include:  
@@ -22,6 +22,16 @@ Other R packages heavily used here include:
 2. [vegan](https://cran.r-project.org/web/packages/vegan/index.html)  
 3. [dada2](https://benjjneb.github.io/dada2/)  
 4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
+
+I started my career in microbiome research at the bench and essentially
+had to [ELI5](https://www.dictionary.com/e/slang/eli5/) to myself many
+various data and processing tools. I’ve spent a ton of time poring over
+and experimenting with others’ code to get where I am, and am sharing
+for the benefit of those who may be where I was. Likely, the ideal
+candidate to benefit from micromeg would be another bench scientist
+without much formal statistics or bioinformatics training. Fair warning,
+if you already have a strong stats/informatics background, this may not
+be of much use for you!
 
 ## Installation
 
@@ -67,24 +77,24 @@ This metadata object is a tibble (because I personally like the
 should also be fine to use.
 
 The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
-sounds like, and it must be unique, and it must match your sequencing
-data.
+sounds like! It must be unique, and it must match what you’ve called
+your samples in your sequencing data.
 
 In this made up example, we did 16S sequencing targeting the V4 region
-(following [this
+(following [the Kozich et al. 2013
 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
-nasal swabs, then processed the specimens through the
-[dada2](https://benjjneb.github.io/dada2/) pipeline. The output we get
-from dada2 is:
+nasal swabs, then processed the specimens through
+[dada2](https://benjjneb.github.io/dada2/). The output we get from dada2
+is:
 
 1.  An [ASV (amplicon sequencing variant)
-    table](https://benjjneb.github.io/dada2/).  
+    table](https://benjjneb.github.io/dada2/) and  
 2.  Its associated taxonomy table.
 
 Next, let’s load in the example [ASV
-table](https://benjjneb.github.io/dada2/). (N.B.: Any sort of data in
-tabular format similar to the sample **should** work, but no
-guarantees.)
+table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn’t
+necessarily strictly have to be an ASV table. Any sort of data in
+tabular format similar to the example **should** work.)
 
 ``` r
 asvtable <- makeExampleSeqtab()
@@ -134,7 +144,8 @@ asvtable <- makeExample("asv")
 taxa <- makeExample("taxa")
 ```
 
-You can be even more lazy and make all three tibble at once:
+You can be even more lazy and make all three example tibbles (metadata,
+ASV table, and its taxonomy table) at once:
 
 ``` r
 
@@ -193,9 +204,19 @@ taxa     <- all$taxa
 Now that we’ve loaded in our metadata file, we can check it:
 
 ``` r
+
 checkMeta(metadata)
 #> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 1
 #> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
 #> you were not expecting this, check your metadata object again. Sample(s) HC1
 #> were detected to have NAs or empty cells.
 ```
+
+------------------------------------------------------------------------
+
+# Acknowledgements
+
+As mentioned above, I could not have created this without learning from
+others’ work.
+
+Specific acknowledgements to be added later
