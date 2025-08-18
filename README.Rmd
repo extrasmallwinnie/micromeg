@@ -42,7 +42,7 @@ pak::pak("extrasmallwinnie/micromeg")
 
 First, load in a very simple example to get an idea for the format of what's expected and the general processing flow.     
      
-I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected their health status, their age at collection, sex, and simple location (rural or urban). Let's load it into our session as an object called "metadata":
+I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected their health status, their age at collection, sex, and simple location (rural or urban). There is also one lab negative control and one lab positive control. Let's load it into our session as an object called "metadata":
 
 ```{r examplemeta}
 library(micromeg)
@@ -55,14 +55,16 @@ metadata
 
 This metadata object is a tibble (because I personally like the [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames should also be fine to use.     
     
-The "SampleID" field hasn't been discussed yet, but it's exactly what it sounds like! It must be unique, and it must match what you've called your samples in your sequencing data.    
+The "SampleID" field hasn't been discussed yet, but it's exactly what it sounds like! It must be unique, and it must match what you've called your samples in your sequencing data.
+
+You may also notice that there's some missing data (the NAs), which we'll talk about more later.    
     
-In this made up example, we did 16S sequencing targeting the V4 region (following [the Kozich et al. 2013 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these nasal swabs, then processed the specimens through [dada2](https://benjjneb.github.io/dada2/). The output we get from dada2 is:
+In this made up toy example, we did 16S sequencing targeting the V4 region (following [the Kozich et al. 2013 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these nasal swabs, then processed the sequencing data through [dada2](https://benjjneb.github.io/dada2/). The output we get from dada2 is:
 
 1. An [ASV (amplicon sequencing variant) table](https://benjjneb.github.io/dada2/) and   
 2. Its associated taxonomy table.   
 
-Next, let's load in the example [ASV table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn't necessarily strictly have to be an ASV table. Any sort of data in tabular format similar to the example **should** work.)
+Next, let's load in the example [ASV table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn't necessarily strictly have to be an ASV table. Any sort of data in tabular format (e.g., OTU table) similar to the example **should** work.)
 
 ```{r asvexample}
 asvtable <- makeExampleSeqtab()

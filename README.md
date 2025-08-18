@@ -50,7 +50,8 @@ what’s expected and the general processing flow.
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
 collected their health status, their age at collection, sex, and simple
-location (rural or urban). Let’s load it into our session as an object
+location (rural or urban). There is also one lab negative control and
+one lab positive control. Let’s load it into our session as an object
 called “metadata”:
 
 ``` r
@@ -59,16 +60,18 @@ library(micromeg)
 metadata <- makeExampleMeta()
 
 metadata
-#> # A tibble: 7 × 5
-#>   SampleID HealthStatus   Age Sex    Location
-#>   <chr>    <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1      healthy         48 female <NA>    
-#> 2 HC2      healthy         32 male   urban   
-#> 3 HC3      healthy         24 female urban   
-#> 4 Sick1    sick            42 male   rural   
-#> 5 Sick2    sick            50 male   urban   
-#> 6 Sick3    sick            45 male   rural   
-#> 7 Sick4    sick            40 female urban
+#> # A tibble: 9 × 5
+#>   SampleID    HealthStatus   Age Sex    Location
+#>   <chr>       <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1         healthy         48 female <NA>    
+#> 2 HC2         healthy         32 male   urban   
+#> 3 HC3         healthy         24 female urban   
+#> 4 Sick1       sick            42 male   rural   
+#> 5 Sick2       sick            50 male   urban   
+#> 6 Sick3       sick            45 male   rural   
+#> 7 Sick4       sick            40 female urban   
+#> 8 NegControl1 <NA>            NA <NA>   <NA>    
+#> 9 PosControl1 <NA>            NA <NA>   <NA>
 ```
 
 This metadata object is a tibble (because I personally like the
@@ -79,10 +82,13 @@ The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
 sounds like! It must be unique, and it must match what you’ve called
 your samples in your sequencing data.
 
-In this made up example, we did 16S sequencing targeting the V4 region
-(following [the Kozich et al. 2013
+You may also notice that there’s some missing data (the NAs), which
+we’ll talk about more later.
+
+In this made up toy example, we did 16S sequencing targeting the V4
+region (following [the Kozich et al. 2013
 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
-nasal swabs, then processed the specimens through
+nasal swabs, then processed the sequencing data through
 [dada2](https://benjjneb.github.io/dada2/). The output we get from dada2
 is:
 
@@ -93,22 +99,25 @@ is:
 Next, let’s load in the example [ASV
 table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn’t
 necessarily strictly have to be an ASV table. Any sort of data in
-tabular format similar to the example **should** work.)
+tabular format (e.g., OTU table) similar to the example **should**
+work.)
 
 ``` r
 asvtable <- makeExampleSeqtab()
 
 asvtable
-#> # A tibble: 7 × 10
-#>   SampleID  ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
-#>   <chr>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 HC1       1856 11652 13681  2994  9111  3995 10821  3937     4
-#> 2 HC2      25732  4775  2902  1628  1061 13536  6216  4089     6
-#> 3 HC3       3385  6760  6184   569  7081  8358  8780  2907     8
-#> 4 Sick1    29939 26217 18965  4483  3018   217  1599 12441     6
-#> 5 Sick2    29954 16142  9656  9373  3221  9506  4237   294     6
-#> 6 Sick3    29724  2771 26380  7803  8003  8157 13010  8469     7
-#> 7 Sick4        1     2     0     5     1     0     0     0     1
+#> # A tibble: 9 × 10
+#>   SampleID     ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
+#>   <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 HC1          1856 11652 13681  2994  9111  3995 10821  3937     4
+#> 2 HC2         25732  4775  2902  1628  1061 13536  6216  4089     6
+#> 3 HC3          3385  6760  6184   569  7081  8358  8780  2907     8
+#> 4 Sick1       29939 26217 18965  4483  3018   217  1599 12441     6
+#> 5 Sick2       29954 16142  9656  9373  3221  9506  4237   294     6
+#> 6 Sick3       29724  2771 26380  7803  8003  8157 13010  8469     7
+#> 7 Sick4           1     2     0     5     1     0     0     0     1
+#> 8 NegControl1     1     1     0     2     0     0     0     0     0
+#> 9 PosControl1  1000  1000  1000     0  1000     0     0     0     0
 ```
 
 Finally, let’s load in the example taxonomy file. This was generated
@@ -156,28 +165,32 @@ all <- makeExample("all")
 
 all
 #> $metadata
-#> # A tibble: 7 × 5
-#>   SampleID HealthStatus   Age Sex    Location
-#>   <chr>    <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1      healthy         48 female <NA>    
-#> 2 HC2      healthy         32 male   urban   
-#> 3 HC3      healthy         24 female urban   
-#> 4 Sick1    sick            42 male   rural   
-#> 5 Sick2    sick            50 male   urban   
-#> 6 Sick3    sick            45 male   rural   
-#> 7 Sick4    sick            40 female urban   
+#> # A tibble: 9 × 5
+#>   SampleID    HealthStatus   Age Sex    Location
+#>   <chr>       <chr>        <dbl> <chr>  <chr>   
+#> 1 HC1         healthy         48 female <NA>    
+#> 2 HC2         healthy         32 male   urban   
+#> 3 HC3         healthy         24 female urban   
+#> 4 Sick1       sick            42 male   rural   
+#> 5 Sick2       sick            50 male   urban   
+#> 6 Sick3       sick            45 male   rural   
+#> 7 Sick4       sick            40 female urban   
+#> 8 NegControl1 <NA>            NA <NA>   <NA>    
+#> 9 PosControl1 <NA>            NA <NA>   <NA>    
 #> 
 #> $asvtable
-#> # A tibble: 7 × 10
-#>   SampleID  ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
-#>   <chr>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 HC1       1856 11652 13681  2994  9111  3995 10821  3937     4
-#> 2 HC2      25732  4775  2902  1628  1061 13536  6216  4089     6
-#> 3 HC3       3385  6760  6184   569  7081  8358  8780  2907     8
-#> 4 Sick1    29939 26217 18965  4483  3018   217  1599 12441     6
-#> 5 Sick2    29954 16142  9656  9373  3221  9506  4237   294     6
-#> 6 Sick3    29724  2771 26380  7803  8003  8157 13010  8469     7
-#> 7 Sick4        1     2     0     5     1     0     0     0     1
+#> # A tibble: 9 × 10
+#>   SampleID     ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
+#>   <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
+#> 1 HC1          1856 11652 13681  2994  9111  3995 10821  3937     4
+#> 2 HC2         25732  4775  2902  1628  1061 13536  6216  4089     6
+#> 3 HC3          3385  6760  6184   569  7081  8358  8780  2907     8
+#> 4 Sick1       29939 26217 18965  4483  3018   217  1599 12441     6
+#> 5 Sick2       29954 16142  9656  9373  3221  9506  4237   294     6
+#> 6 Sick3       29724  2771 26380  7803  8003  8157 13010  8469     7
+#> 7 Sick4           1     2     0     5     1     0     0     0     1
+#> 8 NegControl1     1     1     0     2     0     0     0     0     0
+#> 9 PosControl1  1000  1000  1000     0  1000     0     0     0     0
 #> 
 #> $taxa
 #> # A tibble: 9 × 8
@@ -205,10 +218,10 @@ Now that we’ve loaded in our metadata file, we can check it:
 ``` r
 
 checkMeta(metadata)
-#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 1
+#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 3
 #> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
-#> you were not expecting this, check your metadata object again. Sample(s) HC1
-#> were detected to have NAs or empty cells.
+#> you were not expecting this, check your metadata object again. Sample(s) HC1,
+#> NegControl1, PosControl1 were detected to have NAs or empty cells.
 ```
 
 ------------------------------------------------------------------------
