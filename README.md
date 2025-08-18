@@ -227,7 +227,7 @@ checkMeta(metadata)
 You’ll see there’s a warning that NAs were detected in the metadata
 table. This is not bad or wrong, and it’s OK to have NAs! The warning is
 there to check with you that you were expecting to see some missing
-data. If you weren’t check that your metadata object was loaded in
+data. If you weren’t, check that your metadata object was loaded in
 correctly.
 
 In this case, there are NAs in a few spots:
@@ -238,6 +238,25 @@ In this case, there are NAs in a few spots:
 2.  Location is missing for the participant that sample “HC1” was taken
     from. Let’s say that the participant declined to share their
     location, so that’s why it’s missing from our data.
+
+This is all fine and there are no glaring red flags with our metadata
+object.
+
+(Why are negative controls so important? See
+<https://pubmed.ncbi.nlm.nih.gov/25387460/>,
+<https://pubmed.ncbi.nlm.nih.gov/27239228/>,
+<https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y>)
+
+OK, now let’s check that our ASV and taxonomy tables:
+
+``` r
+
+checkMeta(metadata)
+#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 3
+#> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
+#> you were not expecting this, check your metadata object again. Sample(s) HC1,
+#> NegControl1, PosControl1 were detected to have NAs or empty cells.
+```
 
 ------------------------------------------------------------------------
 
