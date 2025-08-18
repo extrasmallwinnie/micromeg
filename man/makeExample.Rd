@@ -19,6 +19,6 @@ Create an example object
 metadata <- makeExample("meta")
 asvtable <- makeExample("asv")
 taxa     <- makeExample("taxa")
-all      <- makeExample().   # OR:
+all      <- makeExample()   # OR:
 all      <- makeExample("all")
 }
