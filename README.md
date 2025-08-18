@@ -8,14 +8,13 @@
 <!-- badges: end -->
 
 The goal of micromeg is to document and share convenience functions I
-personally use frequently for microbiome data analysis and processing.
-This package does not create anything new and is built on the great work
-of others. Many of the functions it provides already exist in other
-packages. For example,
+use frequently for microbiome data analysis and processing. This package
+does not create anything new and is built on the great work of others.
+Many of the functions it provides already exist in other packages. For
+example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
-provides many tools for analysis of microbiome data; it is very
-well-documented, commonly used (I use it myself!) and so may be better
-for your purposes.
+provides many similar tools, and is very well-documented and commonly
+used (I use it myself!) and so may be better for your purposes.
 
 Other R packages heavily used here include:  
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem  
@@ -24,14 +23,14 @@ Other R packages heavily used here include:
 4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 I started my career in microbiome research at the bench and essentially
-had to [ELI5](https://www.dictionary.com/e/slang/eli5/) to myself many
-various data and processing tools. I’ve spent a ton of time poring over
-and experimenting with others’ code to get where I am, and am sharing
-for the benefit of those who may be where I was. Likely, the ideal
-candidate to benefit from micromeg would be another bench scientist
-without much formal statistics or bioinformatics training. Fair warning,
-if you already have a strong stats/informatics background, this may not
-be of much use for you!
+had to [ELI5](https://www.dictionary.com/e/slang/eli5/) to myself how to
+process and analyze “big data”. I’ve spent a ton of time poring over and
+experimenting with others’ code to get where I am, and am sharing for
+the benefit of those who may be where I was. Likely, the ideal candidate
+to benefit from micromeg would be another bench scientist without much
+formal statistics or bioinformatics training. Fair warning, if you
+already have a strong stats/informatics background, this may not be of
+much use for you!
 
 ## Installation
 
@@ -43,14 +42,14 @@ You can install the development version of micromeg from
 pak::pak("extrasmallwinnie/micromeg")
 ```
 
-## Example
+## Toy Example
 
-First, load in some example data to get an idea for the format of what’s
-expected.
+First, load in a very simple example to get an idea for the format of
+what’s expected and the general processing flow.
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
-collected their health status, their age at collection, sex, and
+collected their health status, their age at collection, sex, and simple
 location (rural or urban). Let’s load it into our session as an object
 called “metadata”:
 
@@ -219,4 +218,10 @@ checkMeta(metadata)
 As mentioned above, I could not have created this without learning from
 others’ work.
 
-Specific acknowledgements to be added later
+- mothur.  
+- qiime.  
+- mgsat.  
+- maaslin2/3.  
+- vegan.
+
+More acknowledgements and more details to be added later
