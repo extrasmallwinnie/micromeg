@@ -25,12 +25,12 @@ Other R packages heavily used here include:
 I started my career in microbiome research at the bench and essentially
 had to [ELI5](https://www.dictionary.com/e/slang/eli5/) to myself how to
 process and analyze “big data”. I’ve spent a ton of time poring over and
-experimenting with others’ code to get where I am, and am sharing for
-the benefit of those who may be where I was. Likely, the ideal candidate
-to benefit from micromeg would be another bench scientist without much
-formal statistics or bioinformatics training. Fair warning, if you
-already have a strong stats/informatics background, this may not be of
-much use for you!
+experimenting with [others’
+code](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
+Likely, the ideal candidate to benefit from micromeg would be another
+bench scientist without much formal statistics or bioinformatics
+training. Fair warning, if you already have a strong stats/informatics
+background, this may not be of much use for you!
 
 ## Installation
 
