@@ -45,7 +45,8 @@ pak::pak("extrasmallwinnie/micromeg")
 ## Toy Example
 
 First, load in a very simple example to get an idea for the format of
-what’s expected and the general processing flow.
+what’s expected and the general processing flow.  
+\### Toy Example Metadata
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
@@ -84,6 +85,8 @@ your samples in your sequencing data.
 
 You may also notice that there’s some missing data (the NAs), which
 we’ll talk about more later.
+
+## ASV Table
 
 In this made up toy example, we did 16S sequencing targeting the V4
 region (following [the Kozich et al. 2013
