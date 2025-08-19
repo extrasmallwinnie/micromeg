@@ -104,7 +104,7 @@ metadata
 This metadata object is a tibble (because I personally like the
 [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames
 should also be fine to use. If you use my tools, everything will end up
-getting <sub>tibblefied</sub> anyway.
+getting ~~tibblefied~~ anyway.
 
 The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
 sounds like! It must be unique, and it must match what you’ve called
