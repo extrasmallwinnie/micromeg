@@ -20,7 +20,7 @@ filtering <- function(seqtab, minDepth, minASVCount){
     warning(sprintf("Your filtering may remove all ASVs. Your minimum requested ASV count is %s, which may be too aggressive for your data, as the maximum ASV count in your input data is %s.", minASVCount, max(colSums(seqtab[,-1]))))
   }
 
-  seqtabout <- seqtab %>% dplyr::rowwise() %>% dplyr::mutate("row.sum" = sum(dplyr::c_across(where(is.numeric)))) %>% dplyr::filter(row.sum >= minDepth) %>% dplyr::select(-c("row.sum")) %>% dplyr::select(c("X", where(~ is.numeric(.) && sum(.) >= minASVCount))) %>% dplyr::rename("SampleID" = "X") %>% ungroup()
+  seqtabout <- seqtab %>% dplyr::rowwise() %>% dplyr::mutate("row.sum" = sum(dplyr::c_across(where(is.numeric)))) %>% dplyr::filter(.data$row.sum >= minDepth) %>% dplyr::select(-c("row.sum")) %>% dplyr::select(c("X", where(~ is.numeric(.) && sum(.) >= minASVCount))) %>% dplyr::rename("SampleID" = "X") %>% ungroup()
 
   return(seqtabout)
 }

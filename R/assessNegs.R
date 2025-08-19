@@ -18,5 +18,5 @@ assessNegs <- function(asvtable=NULL, ...){
 
  return(both)
 
- print(ggplot2::ggplot(both, ggplot2::aes(x=.data[[column_to_look_in]], y=ReadCount)) + ggplot2::geom_boxplot())
+ print(ggplot2::ggplot(both, ggplot2::aes(x=.data$column_to_look_in, y=.data$ReadCount)) + ggplot2::geom_boxplot())
 }
