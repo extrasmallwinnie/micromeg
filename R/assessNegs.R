@@ -1,3 +1,16 @@
+#' Assess negative controls
+#'
+#' @param asvtable An ASV table
+#' @param ... inherited from identifyNegs
+#'
+#' @returns ? not sure yet
+#' @export
+#' @import ggplot2
+#'
+#' @examples
+#' asvtable <- makeExampleSeqtab()
+#' metadata <- makeExampleMeta()
+#' assessNegs(asvtable, metadata, "SampleType", "negative control")
 assessNegs <- function(asvtable=NULL, ...){
  metadataWithNegs <- identifyNegs(...)
  both <- dplyr::inner_join(metadataWithNegs, asvtable, by="SampleID")

@@ -49,7 +49,7 @@ will be demonstrated below with some made up data.
 
 1.  Do the lab work to extract DNA, make libraries, submit for
     sequencing, etc. Both positive and negative controls are very
-    important!  
+    important! Why?  
 2.  Get your data from your sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
@@ -113,6 +113,8 @@ your samples in your sequencing data.
 You may also notice that there’s some missing data (the NAs), which
 we’ll talk about more later.
 
+#### ASV count and taxonomy tables
+
 In this made up toy example, we did 16S sequencing targeting the V4
 region (following [the Kozich et al. 2013
 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
@@ -120,12 +122,11 @@ nasal swabs, then processed the sequencing data through
 [dada2](https://benjjneb.github.io/dada2/). The output we get from dada2
 is:
 
-1.  An [ASV (amplicon sequencing variant)
+1.  An [ASV (amplicon sequencing variant) count
     table](https://benjjneb.github.io/dada2/) and  
 2.  Its associated taxonomy table.
 
-Next, let’s load in the example [ASV
-table](https://benjjneb.github.io/dada2/). (N.B.: The data doesn’t
+Next, let’s load in the example ASV count table. (N.B.: The data doesn’t
 necessarily strictly have to be an ASV table. Any sort of data in
 tabular format, e.g., OTU table, similar to the example **should**
 work.)
