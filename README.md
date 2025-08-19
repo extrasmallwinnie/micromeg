@@ -58,7 +58,7 @@ will be demonstrated below with some made up data.
     taxonomy table](https://www.nature.com/articles/nmeth.3869).  
 4.  Make a “metadata” file with pertinent information on the samples and
     controls in your run. [Jump to example
-    -\>](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
+    →](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
 5.  Check the quality of the pool by examining your positive and
     negative controls, and how they compare to your samples.  
 6.  TBA.
