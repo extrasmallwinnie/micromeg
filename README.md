@@ -42,6 +42,26 @@ You can install the development version of micromeg from
 pak::pak("extrasmallwinnie/micromeg")
 ```
 
+## Common Workflow
+
+I’ve listed the steps that I usually take with 16S data, some of which
+will be demonstrated below with some made up data.
+
+1.  Do the lab work to extract DNA, make libraries, submit for
+    sequencing, etc. Both positive and negative controls are very
+    important!  
+2.  Get your data from your sequencing core.  
+3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
+    then
+    [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
+    to generate a cleaned [ASV (amplicon sequencing variant) table and a
+    taxonomy table](https://www.nature.com/articles/nmeth.3869).  
+4.  Make a “metadata” file with pertinent information on the samples and
+    controls in your run.
+5.  Check the quality of the pool by examining your positive and
+    negative controls, and how they compare to your samples.  
+6.  TBA.
+
 ## Toy Example
 
 First, load in a very simple example to get an idea for the format of
@@ -109,17 +129,24 @@ asvtable <- makeExampleSeqtab()
 
 asvtable
 #> # A tibble: 9 × 10
-#>   SampleID     ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
-#>   <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 HC1          1856 11652 13681  2994  9111  3995 10821  3937     4
-#> 2 HC2         25732  4775  2902  1628  1061 13536  6216  4089     6
-#> 3 HC3          3385  6760  6184   569  7081  8358  8780  2907     8
-#> 4 Sick1       29939 26217 18965  4483  3018   217  1599 12441     6
-#> 5 Sick2       29954 16142  9656  9373  3221  9506  4237   294     6
-#> 6 Sick3       29724  2771 26380  7803  8003  8157 13010  8469     7
-#> 7 Sick4           1     2     0     5     1     0     0     0     1
-#> 8 NegControl1     1     1     0     2     0     0     0     0     0
-#> 9 PosControl1  1000  1000  1000     0  1000     0     0     0     0
+#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>   <chr>                      <dbl>                  <dbl>                  <dbl>
+#> 1 HC1                         1856                  11652                  13681
+#> 2 HC2                        25732                   4775                   2902
+#> 3 HC3                         3385                   6760                   6184
+#> 4 Sick1                      29939                  26217                  18965
+#> 5 Sick2                      29954                  16142                   9656
+#> 6 Sick3                      29724                   2771                  26380
+#> 7 Sick4                          1                      2                      0
+#> 8 NegContr…                      1                      1                      0
+#> 9 PosContr…                  10000                  10000                  10000
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
+#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 6 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 ```
 
 Finally, let’s load in the example taxonomy file. This was generated
@@ -131,17 +158,17 @@ taxa <- makeExampleTaxa()
 
 taxa
 #> # A tibble: 9 × 8
-#>   ASV   Kingdom  Phylum         Class               Order   Family Genus Species
-#>   <chr> <chr>    <chr>          <chr>               <chr>   <chr>  <chr> <chr>  
-#> 1 ASV1  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-#> 2 ASV2  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Prev… melani…
-#> 3 ASV3  Bacteria Firmicutes     Bacilli             Staphy… Staph… Stap… <NA>   
-#> 4 ASV4  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-#> 5 ASV5  Bacteria Firmicutes     Bacilli             Lactob… Strep… Stre… <NA>   
-#> 6 ASV6  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… rava   
-#> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
-#> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
-#> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
+#>   ASV                            Kingdom Phylum Class Order Family Genus Species
+#>   <chr>                          <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>  
+#> 1 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
+#> 2 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Prev… melani…
+#> 3 TACGTAGGTGGCAAGCGTTATCCGGAATT… Bacter… Firmi… Baci… Stap… Staph… Stap… <NA>   
+#> 4 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
+#> 5 TACGTAGGTCCCGAGCGTTGTCCGGATTT… Bacter… Firmi… Baci… Lact… Strep… Stre… <NA>   
+#> 6 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… rava   
+#> 7 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>   
+#> 8 TACGAAGGGTGCAAGCGTTACTCGGAATT… Bacter… Prote… Gamm… Xant… Xanth… Sten… <NA>   
+#> 9 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>
 ```
 
 BTW, the function makeExample() also exists for your convenience and
@@ -182,31 +209,38 @@ all
 #> 
 #> $asvtable
 #> # A tibble: 9 × 10
-#>   SampleID     ASV1  ASV2  ASV3  ASV4  ASV5  ASV6  ASV7  ASV8  ASV9
-#>   <chr>       <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 HC1          1856 11652 13681  2994  9111  3995 10821  3937     4
-#> 2 HC2         25732  4775  2902  1628  1061 13536  6216  4089     6
-#> 3 HC3          3385  6760  6184   569  7081  8358  8780  2907     8
-#> 4 Sick1       29939 26217 18965  4483  3018   217  1599 12441     6
-#> 5 Sick2       29954 16142  9656  9373  3221  9506  4237   294     6
-#> 6 Sick3       29724  2771 26380  7803  8003  8157 13010  8469     7
-#> 7 Sick4           1     2     0     5     1     0     0     0     1
-#> 8 NegControl1     1     1     0     2     0     0     0     0     0
-#> 9 PosControl1  1000  1000  1000     0  1000     0     0     0     0
+#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>   <chr>                      <dbl>                  <dbl>                  <dbl>
+#> 1 HC1                         1856                  11652                  13681
+#> 2 HC2                        25732                   4775                   2902
+#> 3 HC3                         3385                   6760                   6184
+#> 4 Sick1                      29939                  26217                  18965
+#> 5 Sick2                      29954                  16142                   9656
+#> 6 Sick3                      29724                   2771                  26380
+#> 7 Sick4                          1                      2                      0
+#> 8 NegContr…                      1                      1                      0
+#> 9 PosContr…                  10000                  10000                  10000
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
+#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 6 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 #> 
 #> $taxa
 #> # A tibble: 9 × 8
-#>   ASV   Kingdom  Phylum         Class               Order   Family Genus Species
-#>   <chr> <chr>    <chr>          <chr>               <chr>   <chr>  <chr> <chr>  
-#> 1 ASV1  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-#> 2 ASV2  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Prev… melani…
-#> 3 ASV3  Bacteria Firmicutes     Bacilli             Staphy… Staph… Stap… <NA>   
-#> 4 ASV4  Bacteria Proteobacteria Gammaproteobacteria Pasteu… Paste… Haem… <NA>   
-#> 5 ASV5  Bacteria Firmicutes     Bacilli             Lactob… Strep… Stre… <NA>   
-#> 6 ASV6  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… rava   
-#> 7 ASV7  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>   
-#> 8 ASV8  Bacteria Proteobacteria Gammaproteobacteria Xantho… Xanth… Sten… <NA>   
-#> 9 ASV9  Bacteria Bacteroidota   Bacteroidia         Bacter… Prevo… Allo… <NA>
+#>   ASV                            Kingdom Phylum Class Order Family Genus Species
+#>   <chr>                          <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>  
+#> 1 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
+#> 2 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Prev… melani…
+#> 3 TACGTAGGTGGCAAGCGTTATCCGGAATT… Bacter… Firmi… Baci… Stap… Staph… Stap… <NA>   
+#> 4 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
+#> 5 TACGTAGGTCCCGAGCGTTGTCCGGATTT… Bacter… Firmi… Baci… Lact… Strep… Stre… <NA>   
+#> 6 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… rava   
+#> 7 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>   
+#> 8 TACGAAGGGTGCAAGCGTTACTCGGAATT… Bacter… Prote… Gamm… Xant… Xanth… Sten… <NA>   
+#> 9 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>
 
 # Object "all" is a list, so, for example you can access (and assign, if you want) each tibble with the $ operator:
 

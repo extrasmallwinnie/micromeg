@@ -38,6 +38,20 @@ You can install the development version of micromeg from [GitHub](https://github
 pak::pak("extrasmallwinnie/micromeg")
 ```
 
+## Common Workflow
+
+I've listed the steps that I usually take with 16S data, some of which will be demonstrated below with some made up data.    
+
+1. Do the lab work to extract DNA, make libraries, submit for sequencing, etc. Both positive and negative controls are very important!     
+2. Get your data from your sequencing core.   
+3. Process the data through [dada2](https://benjjneb.github.io/dada2/) then [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) to generate a cleaned [ASV (amplicon sequencing variant) table and a taxonomy table](https://www.nature.com/articles/nmeth.3869).   
+4. Make a "metadata" file with pertinent information on the samples and controls in your run.
+5. Check the quality of the pool by examining your positive and negative controls, and how they compare to your samples.       
+6. TBA.   
+
+
+```{r empty}
+```
 ## Toy Example
 
 First, load in a very simple example to get an idea for the format of what's expected and the general processing flow. 
@@ -145,6 +159,8 @@ checkASV(asvtable, taxa, metadata)
 
 
 ```
+
+
 ___
 
 
