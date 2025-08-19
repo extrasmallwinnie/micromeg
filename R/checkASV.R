@@ -25,8 +25,18 @@ checkASV <- function(asvtable, taxa, metadata){
     warning(sprintf("In your ASV table, not all columns (other than the SampleID) were identified as numeric. Check that you don't have anything that's not a number in your ASV count columns."))
   }
 
-  if(nrow(merge(metadata, asvtable, by="SampleID"))<1) {
+  if(!("SampleID" %in% colnames(asvtable))){
+    warning(sprintf("A column called 'SampleID' wasn't found in your ASV table '%s'. It's recommended to run checkSampleID(%s) first.", deparse(substitute(asvtable)), deparse(substitute(asvtable))))
+  }
+
+  if(!("SampleID" %in% colnames(metadata))){
+    warning(sprintf("A column called 'SampleID' wasn't found in your metadata object '%s'. It's recommended to run checkSampleID(%s) first.", deparse(substitute(metadata)), deparse(substitute(metadata))))
+  }
+
+  if("SampleID" %in% colnames(metadata) & "SampleID" %in% colnames(asvtable)){
+    if(nrow(merge(metadata, asvtable, by="SampleID"))<1) {
     warning(sprintf("After merging your metadata and ASV objects, no samples were retained. Check that the SampleIDs match in each object. For example, you may have a non-matching number of padded zeroes."))
+  }
   }
 }
 
