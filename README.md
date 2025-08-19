@@ -49,7 +49,10 @@ will be demonstrated below with some made up data.
 
 1.  Do the lab work to extract DNA, make libraries, submit for
     sequencing, etc. Both positive and negative controls are very
-    important! Why?  
+    important! Why? Read more here:
+    [^1](<https://pubmed.ncbi.nlm.nih.gov/25387460/>),
+    [^2](<https://pubmed.ncbi.nlm.nih.gov/27239228/>),
+    [^3](<https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y>)  
 2.  Get your data from your sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
@@ -271,7 +274,7 @@ checkMeta(metadata)
 
 You’ll see there’s a warning that NAs were detected in the metadata
 table. This is not bad or wrong, and it’s OK to have NAs! The warning is
-there to check with you that you were expecting to see some missing
+there to check *with you* that you were expecting to see some missing
 data. If you weren’t, check that your metadata object was loaded in
 correctly.
 
@@ -288,12 +291,7 @@ In this case, there are NAs in a few spots:
 This is all fine and there are no glaring red flags with our metadata
 object.
 
-(Why are negative controls so important? See
-<https://pubmed.ncbi.nlm.nih.gov/25387460/>,
-<https://pubmed.ncbi.nlm.nih.gov/27239228/>,
-<https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y>)
-
-OK, now let’s check that our ASV and taxonomy tables:
+OK, now let’s check on ASV and taxonomy tables:
 
 ``` r
 
@@ -322,3 +320,9 @@ important:
   [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
 
 More acknowledgements and more details to be added later
+
+[^1]: 1
+
+[^2]: 2
+
+[^3]: 3
