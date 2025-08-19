@@ -73,7 +73,11 @@ I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
 collected their health status, their age at collection, sex, and simple
 location (rural or urban). There is also one lab negative control and
-one lab positive control. Let’s load it into our session as an object
+one lab positive control.
+
+#### Metadata
+
+Let’s load the example metadata object into our session as an object
 called “metadata”:
 
 ``` r
@@ -98,7 +102,8 @@ metadata
 
 This metadata object is a tibble (because I personally like the
 [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames
-should also be fine to use.
+should also be fine to use. If you use my tools, everything will end up
+getting <sub>tibblefied</sub> anyway.
 
 The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
 sounds like! It must be unique, and it must match what you’ve called
