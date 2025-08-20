@@ -282,8 +282,6 @@ throw a warning with these checks:
 ``` r
 
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
-badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
-badasv2 <- makeBadExampleASV("replace") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
 ```
 
 ``` r
@@ -367,6 +365,13 @@ basasv1_fixed
 
 checkASV(basasv1_fixed, taxa, metadata)
 ```
+
+Great, we’re all set. Let’s move on to much more serious problems.
+
+Like the previous example, this represents another mismatch between the
+ASV count and taxonomy tables. Again, if this were to happen with your
+data, make sure you’re using the correct data and that it’s not messed
+up somehow. Re-run the data processing if necessary.
 
 ## Placeholder
 
