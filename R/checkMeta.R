@@ -21,16 +21,19 @@ checkMeta1 <- function(df, ids = "SampleID") {
 
 checkMeta2 <- function(df, ids = "SampleID"){
 
-  if(!ids%in% colnames(df)) {
-    stop(sprintf("You indicated the variable to use for the sample IDs was %s. However, this was not found as a column name in your metadata file.", ids))
+  if(!ids %in% colnames(df)) {
+    warning(sprintf("You indicated the variable to use for the sample IDs was %s. However, this was not found as a column name in your metadata file.", ids))
   }
 }
 
+
 checkMeta3 <- function(df, ids = "SampleID"){
-  dups <- df[duplicated(df[[ids]]),][ids]
-  dups <- paste0(dups[[ids]], collapse=", ")
-  if(length(unique(df[[ids]])) != nrow(df)) {
-    stop(sprintf("You indicated the variable to use for the sample IDs was %s. However, these are not all unique. All sample IDs must be unique. Your duplicated sample IDs were: %s.", ids, dups))
+  if(ids %in% colnames(df)) {
+       dups <- unique(df[duplicated(df[[ids]]),][ids])
+       dups <- paste0(dups[[ids]], collapse=", ")
+        if(length(unique(df[[ids]])) != nrow(df)) {
+        warning(sprintf("You indicated the variable to use for the sample IDs was %s. However, these are not all unique, and they need to be unique. Your duplicated sample ID(s) were: %s.", ids, dups))
+  }
   }
 }
 

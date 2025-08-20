@@ -219,7 +219,7 @@ ASV table, and its taxonomy table) at once:
 
 all <- makeExample() # OR all <- makeExample("all")
 
-str(all, 1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object
+str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, minimal display here)
 #> List of 3
 #>  $ metadata: tibble [9 × 6] (S3: tbl_df/tbl/data.frame)
 #>  $ asvtable: tibble [9 × 10] (S3: tbl_df/tbl/data.frame)
@@ -257,14 +257,13 @@ correctly.
 In this case, there are NAs in a few spots:
 
 1.  Demographic data is “missing” for the lab positive and negative
-    controls, as that kind of information is not relevant for those
-    samples.  
-2.  Location is missing for the participant that sample “HC1” was taken
-    from. Let’s say that the participant declined to share their
-    geographic location, so it is indeed truly missing. With real life
-    data, it’s pretty normal to have some information missing. People
-    much smarter than I am have
-    [written](https://hbiostat.org/rmsc/missing.html)
+    controls, as that kind of information is not
+    applicable/relevant/meaningful for those samples.  
+2.  Location is missing from the participant for sample “HC1”. Let’s say
+    that this participant declined to share their geographic location,
+    so it is indeed truly missing. With real life data, it’s pretty
+    normal to have some information missing. People much smarter than I
+    am have [written](https://hbiostat.org/rmsc/missing.html)
     [extensively](https://link.springer.com/chapter/10.1007/978-1-4757-3462-1_3)
     [about](https://pubmed.ncbi.nlm.nih.gov/20338724/)
     [missing](https://www.appliedmissingdata.com)
@@ -274,9 +273,15 @@ In this case, there are NAs in a few spots:
 This is all fine and there are no glaring red flags with our metadata
 object.
 
+(checkMeta takes two arguments; the first is your metadata object and
+the second is your sample IDs column. It’s set so that ‘SampleID’ is the
+default so we didn’t have to explicitly tell the function that. Try
+`checkMeta(metadata, "SampleType")` to see another example of a
+different type of warning you can get.)
+
 ------------------------------------------------------------------------
 
-OK, now let’s check on ASV and taxonomy tables:
+OK, now let’s also check on the ASV and taxonomy tables:
 
 ``` r
 
