@@ -324,7 +324,9 @@ important:
 - [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 - [tidyverse](https://tidyverse.tidyverse.org), especially
   [dplyr](https://dplyr.tidyverse.org) and
-  [ggplot2](https://ggplot2.tidyverse.org)
+  [ggplot2](https://ggplot2.tidyverse.org). In addition to these
+  packages, Hadley Wickham and his team have written several extremely
+  helpful [guides and tutorials](https://hadley.nz) on data science.
 - [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
 - [Suite from Dr. Frank Harrell](https://hbiostat.org), especially
   [rms](https://cran.r-project.org/web/packages/rms/index.html) and
