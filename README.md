@@ -202,6 +202,13 @@ taxa
 #> 9 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>
 ```
 
+The ASV “names” are the literal sequences of the amplicons, so they’re
+super long when viewed in this format. The ASV names must match in the
+ASV count and taxonomy tables. It would be stupefyingly difficult and
+annoying for a human to manually verify that they do match, but it’s
+trivial for a computer to do. We will check that the ASV names do indeed
+match later.
+
 BTW, the function makeExample() also exists for your convenience and
 will call upon any of the above, like so:
 
@@ -219,7 +226,7 @@ ASV table, and its taxonomy table) at once:
 
 all <- makeExample() # OR all <- makeExample("all")
 
-str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, minimal display here)
+str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 #> List of 3
 #>  $ metadata: tibble [9 × 6] (S3: tbl_df/tbl/data.frame)
 #>  $ asvtable: tibble [9 × 10] (S3: tbl_df/tbl/data.frame)
