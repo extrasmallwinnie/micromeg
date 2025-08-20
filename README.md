@@ -48,11 +48,13 @@ I’ve listed the steps that I usually take with 16S data, some of which
 will be demonstrated below with some made up data.
 
 1.  Do the lab work to extract DNA, make libraries, submit for
-    sequencing, etc. Both positive and negative controls are very
+    sequencing, etc. Both negative and positive controls are very
     important! Why? Read more here:
     <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
     <sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
-    <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y).</sup>  
+    <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
+    <sup>[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),</sup>
+    <sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>  
 2.  Get your data from your sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
