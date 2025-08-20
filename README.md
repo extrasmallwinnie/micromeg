@@ -23,7 +23,7 @@ Other R packages heavily used here include:
 4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 I started my career in microbiome research at the bench and had to
-![ELI5](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hrYzg1a2I2eGtuNWIwYTRqNDMzNGE0cWlkNGE5OXB4ZHV1YXY4dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WsNbxuFkLi3IuGI9NU/giphy.gif)
+[ELI5](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3hrYzg1a2I2eGtuNWIwYTRqNDMzNGE0cWlkNGE5OXB4ZHV1YXY4dCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WsNbxuFkLi3IuGI9NU/giphy.gif)
 to myself how to process and analyze “big data”. I’ve spent a ton of
 time poring over and experimenting with [others’
 code](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
