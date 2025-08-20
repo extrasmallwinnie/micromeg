@@ -46,9 +46,9 @@ I've listed the steps that I usually take with 16S data, some of which will be d
 2. Get your data from your sequencing core.   
 3. Process the data through [dada2](https://benjjneb.github.io/dada2/) then [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) to generate a cleaned [ASV (amplicon sequencing variant) table and a taxonomy table](https://www.nature.com/articles/nmeth.3869).   
 4. Make a "metadata" file with pertinent information on the samples and controls in your run. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
-5. Load in the ASV and taxonomy tables, and do some basic sanity checking on the metadata, ASV, and taxonomy objects. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata).   
-5. Check the quality of the pool by examining your positive and negative controls, and how they compare to your samples.       
-6. TBA.   
+5. Load in the ASV and taxonomy tables, and do some basic sanity checking on the metadata, ASV, and taxonomy objects. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data).   
+6. Check the quality of the data by examining both the positive and negative controls, and additionally how they compare to your real samples.      
+7. TBA.   
 
 
 ```{r empty}

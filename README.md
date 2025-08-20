@@ -67,9 +67,10 @@ will be demonstrated below with some made up data.
 5.  Load in the ASV and taxonomy tables, and do some basic sanity
     checking on the metadata, ASV, and taxonomy objects. [Jump to
     example
-    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata).  
-6.  Check the quality of the pool by examining your positive and
-    negative controls, and how they compare to your samples.  
+    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data).  
+6.  Check the quality of the data by examining both the positive and
+    negative controls, and additionally how they compare to your real
+    samples.  
 7.  TBA.
 
 ## Toy Example
