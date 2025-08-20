@@ -63,7 +63,7 @@ First, load in a very simple example to get an idea for the format of what's exp
 
 ### Load in example data
      
-I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected from each participant their health status, their age at collection, sex, and a simplified location category (in this case, 'rural' or 'urban'). There was also one lab negative control and one lab positive control. 
+I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected from each participant their health status, their age at collection, sex, and a simplified location category (in this case, 'rural' or 'urban'). There was also four total lab negative controls (two extraction and two PCR negative controls) and one lab positive control containing a known mock community of bacteria. 
 
 #### Metadata
 
@@ -110,7 +110,7 @@ taxa <- makeExampleTaxa()
 taxa
 ```
 
-The ASV "names" are the literal sequences of the amplicons, so they're super long when viewed in this format. The ASV names must match in the ASV count and taxonomy tables. It would be stupefyingly difficult and annoying for a human to manually verify that they do match, but it's trivial for a computer to do. We will check that the ASV names do indeed match later.        
+The ASV "names" are the literal sequences of the amplicons, so they're super long when viewed in this format. The ASV names must match in the ASV count and taxonomy tables. It would be stupefyingly difficult and annoying for a human to manually verify that they do match, but it's trivial for a computer. We will check that the ASV names do indeed match later.        
 
 BTW, the function makeExample() also exists for your convenience and will call upon any of the above, like so:
 
@@ -277,7 +277,6 @@ However, for the first assessment of your negative controls, I recommend looking
 
 This is for me to remember to add to this document:    
 
-Add "bad" examples.       
 identifyNegs and assessNegs.       
 filtering.     
 calcBetaDiv.       

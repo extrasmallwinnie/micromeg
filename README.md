@@ -87,8 +87,9 @@ I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
 collected from each participant their health status, their age at
 collection, sex, and a simplified location category (in this case,
-‘rural’ or ‘urban’). There was also one lab negative control and one lab
-positive control.
+‘rural’ or ‘urban’). There was also four total lab negative controls
+(two extraction and two PCR negative controls) and one lab positive
+control containing a known mock community of bacteria.
 
 #### Metadata
 
@@ -101,18 +102,21 @@ library(micromeg)
 metadata <- makeExampleMeta()
 
 metadata
-#> # A tibble: 9 × 6
-#>   SampleID    SampleType       HealthStatus   Age Sex    Location
-#>   <chr>       <chr>            <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1         nasal swab       healthy         48 female <NA>    
-#> 2 HC2         nasal swab       healthy         32 male   urban   
-#> 3 HC3         nasal swab       healthy         24 female urban   
-#> 4 Sick1       nasal swab       sick            42 male   rural   
-#> 5 Sick2       nasal swab       sick            50 male   urban   
-#> 6 Sick3       nasal swab       sick            45 male   rural   
-#> 7 Sick4       nasal swab       sick            40 female urban   
-#> 8 NegControl1 negative control <NA>            NA <NA>   <NA>    
-#> 9 PosControl1 positive control <NA>            NA <NA>   <NA>
+#> # A tibble: 12 × 6
+#>    SampleID       SampleType       HealthStatus   Age Sex    Location
+#>    <chr>          <chr>            <chr>        <dbl> <chr>  <chr>   
+#>  1 HC1            nasal swab       healthy         48 female <NA>    
+#>  2 HC2            nasal swab       healthy         32 male   urban   
+#>  3 HC3            nasal swab       healthy         24 female urban   
+#>  4 Sick1          nasal swab       sick            42 male   rural   
+#>  5 Sick2          nasal swab       sick            50 male   urban   
+#>  6 Sick3          nasal swab       sick            45 male   rural   
+#>  7 Sick4          nasal swab       sick            40 female urban   
+#>  8 ExtNegControl1 negative control <NA>            NA <NA>   <NA>    
+#>  9 ExtNegControl2 negative control <NA>            NA <NA>   <NA>    
+#> 10 PCRNegControl1 negative control <NA>            NA <NA>   <NA>    
+#> 11 PCRNegControl2 negative control <NA>            NA <NA>   <NA>    
+#> 12 PosControl1    positive control <NA>            NA <NA>   <NA>
 ```
 
 This metadata object is a tibble (because I personally prefer the
@@ -159,18 +163,21 @@ work.)
 asvtable <- makeExampleSeqtab()
 
 asvtable
-#> # A tibble: 9 × 10
-#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
-#>   <chr>                      <dbl>                  <dbl>                  <dbl>
-#> 1 HC1                         1856                  11652                  13681
-#> 2 HC2                        25732                   4775                   2902
-#> 3 HC3                         3385                   6760                   6184
-#> 4 Sick1                      29939                  26217                  18965
-#> 5 Sick2                      29954                  16142                   9656
-#> 6 Sick3                      29724                   2771                  26380
-#> 7 Sick4                          1                      2                      0
-#> 8 NegContr…                      1                      1                      0
-#> 9 PosContr…                  10000                  10000                  10000
+#> # A tibble: 12 × 10
+#>    SampleID TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>    <chr>                     <dbl>                  <dbl>                  <dbl>
+#>  1 HC1                        1856                  11652                  13681
+#>  2 HC2                       25732                   4775                   2902
+#>  3 HC3                        3385                   6760                   6184
+#>  4 Sick1                     29939                  26217                  18965
+#>  5 Sick2                     29954                  16142                   9656
+#>  6 Sick3                     29724                   2771                  26380
+#>  7 Sick4                         1                      2                      0
+#>  8 ExtNegC…                     12                      5                     10
+#>  9 ExtNegC…                     10                      3                      2
+#> 10 PCRNegC…                      0                      2                      0
+#> 11 PCRNegC…                      1                      1                      1
+#> 12 PosCont…                  10005                 100024                  10036
 #> # ℹ abbreviated names:
 #> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
 #> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
@@ -206,8 +213,8 @@ The ASV “names” are the literal sequences of the amplicons, so they’re
 super long when viewed in this format. The ASV names must match in the
 ASV count and taxonomy tables. It would be stupefyingly difficult and
 annoying for a human to manually verify that they do match, but it’s
-trivial for a computer to do. We will check that the ASV names do indeed
-match later.
+trivial for a computer. We will check that the ASV names do indeed match
+later.
 
 BTW, the function makeExample() also exists for your convenience and
 will call upon any of the above, like so:
@@ -228,8 +235,8 @@ all <- makeExample() # OR all <- makeExample("all")
 
 str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 #> List of 3
-#>  $ metadata: tibble [9 × 6] (S3: tbl_df/tbl/data.frame)
-#>  $ asvtable: tibble [9 × 10] (S3: tbl_df/tbl/data.frame)
+#>  $ metadata: tibble [12 × 6] (S3: tbl_df/tbl/data.frame)
+#>  $ asvtable: tibble [12 × 10] (S3: tbl_df/tbl/data.frame)
 #>  $ taxa    : tibble [9 × 8] (S3: tbl_df/tbl/data.frame)
 
 # Object "all" is a list, so, you can access (and assign, if you want) each tibble with the $ operator:
@@ -249,10 +256,11 @@ First, let’s check the metadata object:
 ``` r
 
 checkMeta(metadata)
-#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 3
+#> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 6
 #> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
 #> you were not expecting this, check your metadata object again. Sample(s) HC1,
-#> NegControl1, PosControl1 were detected to have NAs or empty cells.
+#> ExtNegControl1, ExtNegControl2, PCRNegControl1, PCRNegControl2, PosControl1
+#> were detected to have NAs or empty cells.
 ```
 
 You’ll see there’s a warning that NAs were detected in the metadata
@@ -305,18 +313,21 @@ throw a warning with these checks:
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
 
 badasv1
-#> # A tibble: 9 × 10
-#>   ID        TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
-#>   <chr>                      <dbl>                  <dbl>                  <dbl>
-#> 1 HC1                         1856                  11652                  13681
-#> 2 HC2                        25732                   4775                   2902
-#> 3 HC3                         3385                   6760                   6184
-#> 4 Sick1                      29939                  26217                  18965
-#> 5 Sick2                      29954                  16142                   9656
-#> 6 Sick3                      29724                   2771                  26380
-#> 7 Sick4                          1                      2                      0
-#> 8 NegContr…                      1                      1                      0
-#> 9 PosContr…                  10000                  10000                  10000
+#> # A tibble: 12 × 10
+#>    ID       TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>    <chr>                     <dbl>                  <dbl>                  <dbl>
+#>  1 HC1                        1856                  11652                  13681
+#>  2 HC2                       25732                   4775                   2902
+#>  3 HC3                        3385                   6760                   6184
+#>  4 Sick1                     29939                  26217                  18965
+#>  5 Sick2                     29954                  16142                   9656
+#>  6 Sick3                     29724                   2771                  26380
+#>  7 Sick4                         1                      2                      0
+#>  8 ExtNegC…                     12                      5                     10
+#>  9 ExtNegC…                     10                      3                      2
+#> 10 PCRNegC…                      0                      2                      0
+#> 11 PCRNegC…                      1                      1                      1
+#> 12 PosCont…                  10005                 100024                  10036
 #> # ℹ abbreviated names:
 #> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
 #> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
@@ -361,18 +372,21 @@ Check that it looks good and we’re no longer getting any warnings:
 
 ``` r
 badasv1_fixed
-#> # A tibble: 9 × 10
-#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
-#>   <chr>                      <dbl>                  <dbl>                  <dbl>
-#> 1 HC1                         1856                  11652                  13681
-#> 2 HC2                        25732                   4775                   2902
-#> 3 HC3                         3385                   6760                   6184
-#> 4 Sick1                      29939                  26217                  18965
-#> 5 Sick2                      29954                  16142                   9656
-#> 6 Sick3                      29724                   2771                  26380
-#> 7 Sick4                          1                      2                      0
-#> 8 NegContr…                      1                      1                      0
-#> 9 PosContr…                  10000                  10000                  10000
+#> # A tibble: 12 × 10
+#>    SampleID TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>    <chr>                     <dbl>                  <dbl>                  <dbl>
+#>  1 HC1                        1856                  11652                  13681
+#>  2 HC2                       25732                   4775                   2902
+#>  3 HC3                        3385                   6760                   6184
+#>  4 Sick1                     29939                  26217                  18965
+#>  5 Sick2                     29954                  16142                   9656
+#>  6 Sick3                     29724                   2771                  26380
+#>  7 Sick4                         1                      2                      0
+#>  8 ExtNegC…                     12                      5                     10
+#>  9 ExtNegC…                     10                      3                      2
+#> 10 PCRNegC…                      0                      2                      0
+#> 11 PCRNegC…                      1                      1                      1
+#> 12 PosCont…                  10005                 100024                  10036
 #> # ℹ abbreviated names:
 #> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
 #> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
@@ -478,7 +492,6 @@ other similar tool.
 
 This is for me to remember to add to this document:
 
-Add “bad” examples.  
 identifyNegs and assessNegs.  
 filtering.  
 calcBetaDiv.
