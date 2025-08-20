@@ -282,9 +282,6 @@ throw a warning with these checks:
 ``` r
 
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
-```
-
-``` r
 
 badasv1
 #> # A tibble: 9 × 10
@@ -382,6 +379,8 @@ taxonomy table. If this happens with your data, you’ll need to check
 that you’re using the correct data and that nothing happened to corrupt
 it. You may need to re-run dada2 (or whatever workflow you used).
 
+Next, a similar example of something that can go wrong:
+
 ``` r
 badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
 checkASV(badasv3, taxa, metadata)
@@ -393,6 +392,23 @@ Like the previous example, this represents another mismatch between the
 ASV count and taxonomy tables. Again, if this were to happen with your
 data, make sure you’re using the correct data and that it’s not messed
 up somehow. Re-run the data processing if necessary.
+
+Finally, one more example of something that can go wrong is that there’s
+no match in the SampleIDs in the metadata and ASV count objects. Maybe
+you used a different number of padding zeroes, or got the wrong file
+somewhere.
+
+``` r
+badmetadata <- makeBadExampleMeta("wrongmeta") # adds a zero to the SampleIDs in the metadata object
+checkASV(asvtable, taxa, badmetadata)
+#> Warning in checkASV(asvtable, taxa, badmetadata): After merging your metadata
+#> and ASV objects, no samples were retained. Check that the SampleIDs match in
+#> each object. For example, you may have a non-matching number of padded zeroes.
+```
+
+Since R can’t find a match between the metadata and ASV objects, you
+won’t be able to do any actual analysis with your metadata. This would
+need to be fixed before moving on.
 
 ## Placeholder
 

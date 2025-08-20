@@ -1,12 +1,14 @@
 #' Make a "bad" ASV count object that will fail checks
 #'
-#' @param operation "ids" or "remove"
+#' @param operation "ids", "remove", or "rename"
 #'
 #' @returns A "bad" ASV count object that will fail checks
 #' @export
 #'
 #' @examples
 #' makeBadExampleASV("ids")
+#' makeBadExampleASV("remove")
+#' makeBadExampleASV("replace")
 makeBadExampleASV <- function(operation) {
   result <- switch(operation,
                    "ids" = makeExampleSeqtab() %>% dplyr::rename(ID=.data$SampleID), # rename SampleID column

@@ -19,11 +19,4 @@ makeBadExample <- function(...){
   return(temp)
 }
 
-makeBadExampleMeta <- function(operation) {
-  result <- switch(operation,
-                   "ids" = makeExampleMeta() %>% dplyr::rename(ID=.data$SampleID), # rename SampleID column
-                   "dups" = makeExampleMeta() %>% dplyr::mutate("SampleID" = replace(.data$SampleID, .data$SampleID == "HC2", "HC1")), # create a duplicated value in SampleID column
-                   "default" = "Invalid operation")
-  return(result)
-}
 

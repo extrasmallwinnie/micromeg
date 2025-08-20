@@ -7,7 +7,7 @@
 makeBadExampleASV(operation)
 }
 \arguments{
-\item{operation}{"ids" or "remove"}
+\item{operation}{"ids", "remove", or "rename"}
 }
 \value{
 A "bad" ASV count object that will fail checks
@@ -17,4 +17,6 @@ Make a "bad" ASV count object that will fail checks
 }
 \examples{
 makeBadExampleASV("ids")
+makeBadExampleASV("remove")
+makeBadExampleASV("replace")
 }
