@@ -9,7 +9,7 @@
 
 The goal of `micromeg` is to document and share convenience functions I
 use frequently for microbiome data analysis and processing. This package
-does not create any brand new functionatlity and was built on the great
+does not create any brand new functionality and was built on the great
 work of others. Many of the functions it provides already exist in other
 packages. For example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
