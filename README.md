@@ -63,10 +63,14 @@ will be demonstrated below with some made up data.
     taxonomy table](https://www.nature.com/articles/nmeth.3869).  
 4.  Make a “metadata” file with pertinent information on the samples and
     controls in your run. [Jump to example
-    →](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
-5.  Check the quality of the pool by examining your positive and
+    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
+5.  Load in the ASV and taxonomy tables, and do some basic sanity
+    checking on the metadata, ASV, and taxonomy objects. [Jump to
+    example
+    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata).  
+6.  Check the quality of the pool by examining your positive and
     negative controls, and how they compare to your samples.  
-6.  TBA.
+7.  TBA.
 
 ## Toy Example
 
@@ -261,9 +265,12 @@ asvtable <- all$asvtable
 taxa     <- all$taxa
 ```
 
-### Check data for potential issues.
+### Sanity check the data
 
-Now that we’ve loaded in our metadata file, we can check it:
+Now that we’ve loaded in our main objects (metadata, ASV counts, ASV
+taxonomy) we will do some basic sanity checks on these three objects.
+
+First, let’s check the metadata object:
 
 ``` r
 

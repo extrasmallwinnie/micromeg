@@ -45,7 +45,8 @@ I've listed the steps that I usually take with 16S data, some of which will be d
 1. Do the lab work to extract DNA, make libraries, submit for sequencing, etc. Both negative and positive controls are very important! Why? Read more here: ^[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),^ ^[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),^ ^[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),^ ^[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),^ ^[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)^        
 2. Get your data from your sequencing core.   
 3. Process the data through [dada2](https://benjjneb.github.io/dada2/) then [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) to generate a cleaned [ASV (amplicon sequencing variant) table and a taxonomy table](https://www.nature.com/articles/nmeth.3869).   
-4. Make a "metadata" file with pertinent information on the samples and controls in your run. [Jump to example &rarr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
+4. Make a "metadata" file with pertinent information on the samples and controls in your run. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
+5. Load in the ASV and taxonomy tables, and do some basic sanity checking on the metadata, ASV, and taxonomy objects. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata).   
 5. Check the quality of the pool by examining your positive and negative controls, and how they compare to your samples.       
 6. TBA.   
 
@@ -135,9 +136,11 @@ taxa     <- all$taxa
 
 ```
 
-### Check data for potential issues.
+### Sanity check the data
 
-Now that we've loaded in our metadata file, we can check it:
+Now that we've loaded in our main objects (metadata, ASV counts, ASV taxonomy) we will do some basic sanity checks on these three objects.    
+
+First, let's check the metadata object: 
 
 ```{r metacheck}
 
