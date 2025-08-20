@@ -211,12 +211,12 @@ Type in `y` to accept the change.
 basasv1_fixed <- makeExample("asv")
 ```
 
-It 
+Check that it looks good and we're no longer getting any warnings:
 
 ```{r badcheck1.3}
 basasv1_fixed
 
-
+checkASV(basasv1_fixed, taxa, metadata)
 ```
 
 ## Placeholder
