@@ -174,18 +174,49 @@ Since we didn't get any warnings from checkASV(), our three objects all passed m
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
 badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
 badasv2 <- makeBadExampleASV("replace") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
+```
+
+```{r badcheck1.0}
+
+badasv1
 
 checkASV(badasv1, taxa, metadata)
 
 ```
 
-This is the least "bad" warning. We got a warning that no column named "SampleID" was found in the ASV count table. You don't *have* to follow this convention, but to use this package, it will make things much easier. 
+This is the least "bad" warning. We got a warning that no column named "SampleID" was found in the ASV count table. You don't *have* to follow this convention, but to use this package, it will make things much easier if you do. 
 
 We got the prompt to run checkSampleID() on badasv1, so let's do that:
 
-```{r badcheck1, eval=FALSE}
+```{r badcheck1.1, eval=FALSE}
+basasv1_fixed <- checkSampleID(badasv1)
+```
 
-checkSampleID(badasv1)
+This function is interactive, which is hard to demonstrate here, but this will have popped up on the console:    
+
+`A column called 'SampleID' was not detected. What is the column name that you're using as your sample IDs?`   
+
+I'll now type in the name, which was 'ID':    
+
+`ID`   
+
+Now it checks with me that it's OK to change the name:    
+
+`Is it OK to change column name 'ID' to 'SampleID'? y/n:`
+
+Type in `y` to accept the change. 
+
+```{r badcheck1.2, eval=TRUE, echo=FALSE}
+# behind the scenes to stuff to force the tutorial to work as intended
+basasv1_fixed <- makeExample("asv")
+```
+
+It 
+
+```{r badcheck1.3}
+basasv1_fixed
+
+
 ```
 
 ## Placeholder

@@ -284,6 +284,30 @@ throw a warning with these checks:
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
 badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
 badasv2 <- makeBadExampleASV("replace") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
+```
+
+``` r
+
+badasv1
+#> # A tibble: 9 × 10
+#>   ID        TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>   <chr>                      <dbl>                  <dbl>                  <dbl>
+#> 1 HC1                         1856                  11652                  13681
+#> 2 HC2                        25732                   4775                   2902
+#> 3 HC3                         3385                   6760                   6184
+#> 4 Sick1                      29939                  26217                  18965
+#> 5 Sick2                      29954                  16142                   9656
+#> 6 Sick3                      29724                   2771                  26380
+#> 7 Sick4                          1                      2                      0
+#> 8 NegContr…                      1                      1                      0
+#> 9 PosContr…                  10000                  10000                  10000
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
+#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 6 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 
 checkASV(badasv1, taxa, metadata)
 #> Warning in checkASV(badasv1, taxa, metadata): A column called 'SampleID' wasn't
@@ -294,13 +318,52 @@ checkASV(badasv1, taxa, metadata)
 This is the least “bad” warning. We got a warning that no column named
 “SampleID” was found in the ASV count table. You don’t *have* to follow
 this convention, but to use this package, it will make things much
-easier.
+easier if you do.
 
 We got the prompt to run checkSampleID() on badasv1, so let’s do that:
 
 ``` r
+basasv1_fixed <- checkSampleID(badasv1)
+```
 
-checkSampleID(badasv1)
+This function is interactive, which is hard to demonstrate here, but
+this will have popped up on the console:
+
+`A column called 'SampleID' was not detected. What is the column name that you're using as your sample IDs?`
+
+I’ll now type in the name, which was ‘ID’:
+
+`ID`
+
+Now it checks with me that it’s OK to change the name:
+
+`Is it OK to change column name 'ID' to 'SampleID'? y/n:`
+
+Type in `y` to accept the change.
+
+It
+
+``` r
+basasv1_fixed
+#> # A tibble: 9 × 10
+#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>   <chr>                      <dbl>                  <dbl>                  <dbl>
+#> 1 HC1                         1856                  11652                  13681
+#> 2 HC2                        25732                   4775                   2902
+#> 3 HC3                         3385                   6760                   6184
+#> 4 Sick1                      29939                  26217                  18965
+#> 5 Sick2                      29954                  16142                   9656
+#> 6 Sick3                      29724                   2771                  26380
+#> 7 Sick4                          1                      2                      0
+#> 8 NegContr…                      1                      1                      0
+#> 9 PosContr…                  10000                  10000                  10000
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
+#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 6 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 ```
 
 ## Placeholder
