@@ -7,11 +7,11 @@
 
 <!-- badges: end -->
 
-The goal of micromeg is to document and share convenience functions I
+The goal of `micromeg` is to document and share convenience functions I
 use frequently for microbiome data analysis and processing. This package
-does not create anything new and is built on the great work of others.
-Many of the functions it provides already exist in other packages. For
-example,
+does not create any brand new functionatlity and was built on the great
+work of others. Many of the functions it provides already exist in other
+packages. For example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 provides many similar tools, and is very well-documented and commonly
 used (I use it myself!) and so may be better for your purposes.
@@ -22,12 +22,12 @@ Other R packages heavily used here include:
 3. [dada2](https://benjjneb.github.io/dada2/)  
 4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
-I started my career in microbiome research at the bench and essentially
-had to [ELI5](https://www.dictionary.com/e/slang/eli5/) to myself how to
+I started my career in microbiome research at the bench and had to
+[ELI5](https://www.dictionary.com/e/slang/eli5/) to myself how to
 process and analyze “big data”. I’ve spent a ton of time poring over and
 experimenting with [others’
 code](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
-Likely, the ideal candidate to benefit from micromeg would be another
+Likely, the ideal candidate to benefit from `micromeg` would be another
 bench scientist without much formal statistics or bioinformatics
 training. Fair warning, if you already have a strong stats/informatics
 background, this may not be of much use for you!
@@ -42,7 +42,7 @@ You can install the development version of micromeg from
 pak::pak("extrasmallwinnie/micromeg")
 ```
 
-## Common Workflow
+## My Usual Workflow
 
 I’ve listed the steps that I usually take with 16S data, some of which
 will be demonstrated below with some made up data.
@@ -55,23 +55,24 @@ will be demonstrated below with some made up data.
     <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
     <sup>[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),</sup>
     <sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>  
-2.  Get your data from your sequencing core.  
+2.  Get the data from the sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
     [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
     to generate a cleaned [ASV (amplicon sequencing variant) table and a
     taxonomy table](https://www.nature.com/articles/nmeth.3869).  
-4.  Make a “metadata” file with pertinent information on the samples and
-    controls in your run. [Jump to example
+4.  Create a “metadata” file with pertinent information on the samples
+    and controls in your run. [Jump to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
-5.  Load in the ASV and taxonomy tables, and do some basic sanity
-    checking on the metadata, ASV, and taxonomy objects. [Jump to
-    example
+5.  Do some basic sanity checking on the metadata, ASV, and taxonomy
+    objects. [Jump to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data).  
-6.  Check the quality of the data by examining both the positive and
-    negative controls, and additionally how they compare to your real
-    samples.  
-7.  TBA.
+6.  Check the quality of the sequencing data by examining both the
+    positive and negative controls, and additionally how the controls
+    compare to your real samples.  
+7.  Alpha diversity (vegan).  
+8.  Beta diversity (vegan).  
+9.  Differential abundance (maaslin3).
 
 ## Toy Example
 
