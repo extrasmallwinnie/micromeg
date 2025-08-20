@@ -219,6 +219,19 @@ checkASV(basasv1_fixed, taxa, metadata)
 
 Great, we're all set. Let's move on to much more serious problems.
 
+```{r badcheck2.0, eval=TRUE}
+badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
+
+checkASV(badasv2, taxa, metadata)
+```
+
+In this case, one of the ASVs was removed from the count table, so now the number of ASVs in the count table doesn't match the number in the taxonomy table. If this happens with your data, you'll need to check that you're using the correct data and that nothing happened to corrupt it. You may need to re-run dada2 (or whatever workflow you used).
+
+```{r badcheck3.0}
+badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
+checkASV(badasv3, taxa, metadata)
+```
+
 
 Like the previous example, this represents another mismatch between the ASV count and taxonomy tables. Again, if this were to happen with your data, make sure you're using the correct data and that it's not messed up somehow. Re-run the data processing if necessary.
 
