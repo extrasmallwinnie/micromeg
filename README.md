@@ -281,7 +281,10 @@ placeholder
 badasv1 <- makeBadExampleASV("ids")
 badasv2 <- makeBadExampleASV("remove")
 
-checkASV(asvtable, taxa, metadata)
+checkASV(badasv1, taxa, metadata)
+#> Warning in checkASV(badasv1, taxa, metadata): A column called 'SampleID' wasn't
+#> found in your ASV table 'badasv1'. It's recommended to run
+#> checkSampleID(badasv1) first.
 ```
 
 ## Placeholder

@@ -174,7 +174,7 @@ placeholder
 badasv1 <- makeBadExampleASV("ids")
 badasv2 <- makeBadExampleASV("remove")
 
-checkASV(asvtable, taxa, metadata)
+checkASV(badasv1, taxa, metadata)
 
 
 ```
