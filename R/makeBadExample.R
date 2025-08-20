@@ -27,10 +27,3 @@ makeBadExampleMeta <- function(operation) {
   return(result)
 }
 
-makeBadExampleASV <- function(operation) {
-  result <- switch(operation,
-                   "ids" = makeExampleSeqtab() %>% dplyr::rename(ID=.data$SampleID), # rename SampleID column
-                   "remove" = makeExampleSeqtab() %>% dplyr::select(-utils::tail(names(makeExampleSeqtab()), 2)), # remove some ASVs so it won't match the taxa table anymore
-                   "default" = "Invalid operation")
-  return(result)
-}

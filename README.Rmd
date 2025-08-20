@@ -167,6 +167,18 @@ checkASV(asvtable, taxa, metadata)
 
 ```
 
+placeholder
+
+```{r badcheck}
+
+badasv1 <- makeBadExampleASV("ids")
+badasv2 <- makeBadExampleASV("remove")
+
+checkASV(asvtable, taxa, metadata)
+
+
+```
+
 ## Placeholder
 
 This is for me to remember to add to this document:    

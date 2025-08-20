@@ -274,6 +274,16 @@ OK, now let’s check on ASV and taxonomy tables:
 checkASV(asvtable, taxa, metadata)
 ```
 
+placeholder
+
+``` r
+
+badasv1 <- makeBadExampleASV("ids")
+badasv2 <- makeBadExampleASV("remove")
+
+checkASV(asvtable, taxa, metadata)
+```
+
 ## Placeholder
 
 This is for me to remember to add to this document:
