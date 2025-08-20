@@ -124,7 +124,7 @@ You can be even more lazy and make all three example tibbles (metadata, ASV tabl
 
 all <- makeExample() # OR all <- makeExample("all")
 
-str(all, 1)
+str(all, 1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object
 
 # Object "all" is a list, so, you can access (and assign, if you want) each tibble with the $ operator:
 
@@ -179,7 +179,7 @@ checkASV(badasv1, taxa, metadata)
 
 ```
 
-This is the least "bad" warning. We got a warning that no column named "SampleID" was found in the ASV count table. You don't *have* to follow this convention, but to use this package, it will make things much easier if you do. 
+This is the least "bad" warning to get. We got a warning that no column named "SampleID" was found in the ASV count table. You don't *have* to follow this convention, but to use this package, it will make things much easier if you do. 
 
 We got the prompt to run checkSampleID() on badasv1, so let's do that:
 
@@ -214,10 +214,12 @@ basasv1_fixed
 checkASV(basasv1_fixed, taxa, metadata)
 ```
 
-Great, we're all set. Let's move on to much more serious problems.
+Great, we're all set. You can also use checkSampleID() on the metadata object; that's not demonstrated here as it's the same thing, just with a different input.     
+
+Let's move on to much more serious problems.
 
 ```{r badcheck2.0, eval=TRUE}
-badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
+badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table
 
 checkASV(badasv2, taxa, metadata)
 ```
@@ -227,12 +229,13 @@ In this case, one of the ASVs was removed from the count table, so now the numbe
 Next, a similar example of something that can go wrong:
 
 ```{r badcheck3.0}
-badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
+badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else
+
 checkASV(badasv3, taxa, metadata)
 ```
 
 
-Like the previous example, this represents another mismatch between the ASV count and taxonomy tables. Again, if this were to happen with your data, make sure you're using the correct data and that it's not messed up somehow. Re-run the data processing if necessary.
+Like the previous example, this represents another mismatch between the ASV count and taxonomy tables. Again, if this were to happen with your data, make sure you're using the correct data and that it's not messed up somehow. Re-run the data processing steps if necessary.
 
 Finally, one more example of something that can go wrong is that there's no match in the SampleIDs in the metadata and ASV count objects. Maybe you used a different number of padding zeroes, or got the wrong file somewhere.
 
@@ -241,7 +244,28 @@ badmetadata <- makeBadExampleMeta("wrongmeta") # adds a zero to the SampleIDs in
 checkASV(asvtable, taxa, badmetadata)
 ```
 
-Since R can't find a match between the metadata and ASV objects, you won't be able to do any actual analysis with your metadata. This would need to be fixed before moving on. 
+Since R can't figuere out how to match the samples from the metadata and ASV objects, you won't be able to do any actual analysis with your metadata. This would need to be fixed before moving on. 
+____
+
+### Quality check the data
+
+Since we're done with the basic sanity checks and the original objects `metadata`, `asvtable`, and `taxa` all looked good, now we can do an actual more interesting quality check of our data.    
+
+As mentioned previously, lab positive and negative controls are VERY important and should be included at minimum in every single sequencing run.    
+
+#### An aside to pontificate on negative controls
+
+Negative controls are especially important with 16S data due the nature of the process: 1) bacteria and their DNA are ubiquitous and can live even in environments hostile to most other life, 2) the PCR protocol deliberately enriches for all bacteria in a semi-universal way. This means the data can be extremely susceptible to contamination. The details of this are out of the scope of this document, but your FIRST step should be improving your lab methods to reduce contamination potential as much as possible.
+
+However, no matter how amazing you (or your colleagues) are in the lab, you'll probably still have at least some contamination. That's where the negative controls come in. I would recommend having at least one negative extraction control (e.g., extract some ultraclean water or sample buffer) per every extraction batch, and a PCR negative control for every PCR master mix batch.
+
+If you've processed your data through [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) or another such tool, you've already bioinformatically removed some potential contaminants. I'd recommend doing this as part of your workflow before data analysis.   
+
+However, for the first assessment of your negative controls, I recommend looking at the "raw" data, i.e., BEFORE it goes through `decontam` or other similar tool.   
+
+
+
+
 
 ## Placeholder
 
