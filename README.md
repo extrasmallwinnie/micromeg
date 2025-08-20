@@ -84,7 +84,7 @@ what’s expected and the general processing flow.
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
-collected frome each participant their health status, their age at
+collected from each participant their health status, their age at
 collection, sex, and a simplified location category (in this case,
 ‘rural’ or ‘urban’). There was also one lab negative control and one lab
 positive control.
@@ -248,7 +248,7 @@ correctly.
 In this case, there are NAs in a few spots:
 
 1.  Demographic data is “missing” for the lab positive and negative
-    controls, as that kind of information not relevant for those
+    controls, as that kind of information is not relevant for those
     samples.  
 2.  Location is missing for the participant that sample “HC1” was taken
     from. Let’s say that the participant declined to share their
@@ -307,7 +307,7 @@ important:
   [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
 - Colleague and physician-scientist [Dr. Christian
   Rosas-Salazar](https://pediatrics.vumc.org/person/christian-rosas-salazar-md-mph)
-  is talented at many things, but has a knack for creating figures that
-  are both beautiful and informative.
+  is talented at many things, but has an especial knack for creating
+  figures that are both beautiful and informative.
 
 More acknowledgements and more details to be added later

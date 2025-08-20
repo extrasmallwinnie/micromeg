@@ -63,7 +63,7 @@ First, load in a very simple example to get an idea for the format of what's exp
 
 ### Load in example data
      
-I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected frome each participant their health status, their age at collection, sex, and a simplified location category (in this case, 'rural' or 'urban'). There was also one lab negative control and one lab positive control. 
+I've made up an example study where nasal swabs were taken from people who were either "healthy" or "sick" at the time of sampling. We've collected from each participant their health status, their age at collection, sex, and a simplified location category (in this case, 'rural' or 'urban'). There was also one lab negative control and one lab positive control. 
 
 #### Metadata
 
@@ -151,7 +151,7 @@ You'll see there's a warning that NAs were detected in the metadata table. This 
 
 In this case, there are NAs in a few spots:
 
-1. Demographic data is "missing" for the lab positive and negative controls, as that kind of information not relevant for those samples.    
+1. Demographic data is "missing" for the lab positive and negative controls, as that kind of information is not relevant for those samples.    
 2. Location is missing for the participant that sample "HC1" was taken from. Let's say that the participant declined to share their geographic location, so it is indeed truly missing. With real life data, it's pretty normal to have some information missing. People much smarter than I am have [written](https://hbiostat.org/rmsc/missing.html) [extensively](https://link.springer.com/chapter/10.1007/978-1-4757-3462-1_3) [about](https://pubmed.ncbi.nlm.nih.gov/20338724/) [missing](https://www.appliedmissingdata.com) [data](https://pubmed.ncbi.nlm.nih.gov/17401454/), and how to deal with it, so that won't be discussed much more here.       
 
 This is all fine and there are no glaring red flags with our metadata object.
@@ -192,6 +192,6 @@ As mentioned above, I could not have done any of this without the benefit of wha
 * [tidyverse](https://tidyverse.tidyverse.org), especially [dplyr](https://dplyr.tidyverse.org) and [ggplot2](https://ggplot2.tidyverse.org). In addition to these packages, Hadley Wickham and team have written several extremely helpful [guides and tutorials](https://hadley.nz) on data science.
 * [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
 * [Suite from Dr. Frank Harrell](https://hbiostat.org), especially [rms](https://cran.r-project.org/web/packages/rms/index.html) and [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
-* Colleague and physician-scientist [Dr. Christian Rosas-Salazar](https://pediatrics.vumc.org/person/christian-rosas-salazar-md-mph) is talented at many things, but has a knack for creating figures that are both beautiful and informative.   
+* Colleague and physician-scientist [Dr. Christian Rosas-Salazar](https://pediatrics.vumc.org/person/christian-rosas-salazar-md-mph) is talented at many things, but has an especial knack for creating figures that are both beautiful and informative.   
 
 More acknowledgements and more details to be added later
