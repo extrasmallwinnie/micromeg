@@ -274,17 +274,33 @@ OK, now let’s check on ASV and taxonomy tables:
 checkASV(asvtable, taxa, metadata)
 ```
 
-placeholder
+Since we didn’t get any warnings from checkASV(), our three objects all
+passed my sanity checks. That isn’t super helpful as an example, so
+instead, let’s deliberately make some “bad” ASV count tables that will
+throw a warning with these checks:
 
 ``` r
 
-badasv1 <- makeBadExampleASV("ids")
-badasv2 <- makeBadExampleASV("remove")
+badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
+badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table so it no longer matches the taxonomy table
+badasv2 <- makeBadExampleASV("replace") # replaces the name of one of the ASVs with something else so again it will no longer match the taxonomy table
 
 checkASV(badasv1, taxa, metadata)
 #> Warning in checkASV(badasv1, taxa, metadata): A column called 'SampleID' wasn't
 #> found in your ASV table 'badasv1'. It's recommended to run
 #> checkSampleID(badasv1) first.
+```
+
+This is the least “bad” warning. We got a warning that no column named
+“SampleID” was found in the ASV count table. You don’t *have* to follow
+this convention, but to use this package, it will make things much
+easier.
+
+We got the prompt to run checkSampleID() on badasv1, so let’s do that:
+
+``` r
+
+checkSampleID(badasv1)
 ```
 
 ## Placeholder
