@@ -63,14 +63,15 @@ will be demonstrated below with some made up data.
     and its associated taxonomy
     table](https://www.nature.com/articles/nmeth.3869).  
 4.  Create a “metadata” file with pertinent information on the samples
-    and controls in your run. [Jump to example
+    and controls in your run. [Go to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
 5.  Do some basic sanity checking on the metadata, ASV, and taxonomy
-    objects. [Jump to example
+    objects. [Go to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data)  
 6.  Check the quality of the sequencing data by examining both the
     positive and negative controls, and additionally how the controls
-    compare to your real samples.  
+    compare to your real samples. [Go to example
+    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#quality-check-the-data)  
 7.  Alpha diversity (vegan).  
 8.  Beta diversity (vegan).  
 9.  Differential abundance (maaslin3).
@@ -140,6 +141,14 @@ was:
 1.  An [ASV (amplicon sequencing variant) count
     table](https://benjjneb.github.io/dada2/) and  
 2.  Its associated taxonomy table.
+
+I do have my own wrapper for dada2+decontam. However, rather than using
+my exact dada2+decontam workflow, I’d highly recommend instead that you
+first follow the tutorials
+[for](https://benjjneb.github.io/dada2/tutorial.html)
+[each](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html),
+as they very nicely describe how to use them and the considerations you
+should have for your own data.
 
 Next, let’s load in the example ASV count table. (N.B.: The data doesn’t
 necessarily strictly have to be an ASV table. Any sort of data in
@@ -318,7 +327,7 @@ much easier if you do.
 We got the prompt to run checkSampleID() on badasv1, so let’s do that:
 
 ``` r
-basasv1_fixed <- checkSampleID(badasv1)
+badasv1_fixed <- checkSampleID(badasv1)
 ```
 
 This function is interactive, which is hard to demonstrate here, but
@@ -339,7 +348,7 @@ Type in `y` to accept the change.
 Check that it looks good and we’re no longer getting any warnings:
 
 ``` r
-basasv1_fixed
+badasv1_fixed
 #> # A tibble: 9 × 10
 #>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
 #>   <chr>                      <dbl>                  <dbl>                  <dbl>
@@ -360,7 +369,7 @@ basasv1_fixed
 #> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
 #> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 
-checkASV(basasv1_fixed, taxa, metadata)
+checkASV(badasv1_fixed, taxa, metadata)
 ```
 
 Great, we’re all set. You can also use checkSampleID() on the metadata
@@ -413,7 +422,7 @@ checkASV(asvtable, taxa, badmetadata)
 
 Since R can’t figuere out how to match the samples from the metadata and
 ASV objects, you won’t be able to do any actual analysis with your
-metadata. This would need to be fixed before moving on. \_\_\_\_
+metadata. This would need to be fixed before moving on. \_\_\_
 
 ### Quality check the data
 
