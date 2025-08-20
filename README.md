@@ -12,7 +12,7 @@ use frequently for microbiome data analysis and processing. This package
 does not create any brand new functionatlity and was built on the great
 work of others. Many of the functions it provides already exist in other
 packages. For example,
-[phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
+`[phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)`
 provides many similar tools, and is very well-documented and commonly
 used (I use it myself!) and so may be better for your purposes.
 
@@ -49,7 +49,7 @@ will be demonstrated below with some made up data.
 
 1.  Do the lab work to extract DNA, make libraries, submit for
     sequencing, etc. Both negative and positive controls are very
-    important! Why? Read more here:
+    important! Why, and what are those? Read more here:
     <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
     <sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
     <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
@@ -83,9 +83,10 @@ what’s expected and the general processing flow.
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
-collected their health status, their age at collection, sex, and simple
-location (rural or urban). There is also one lab negative control and
-one lab positive control.
+collected frome each participant their health status, their age at
+collection, sex, and a simplified location category (in this case,
+‘rural’ or ‘urban’). There was also one lab negative control and one lab
+positive control.
 
 #### Metadata
 
@@ -112,14 +113,16 @@ metadata
 #> 9 PosControl1 positive control <NA>            NA <NA>   <NA>
 ```
 
-This metadata object is a tibble (because I personally like the
+This metadata object is a tibble (because I personally prefer the
 [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames
 should also be fine to use. If you use my tools, everything will end up
 getting ~ tibblefied ~ anyway.
 
-The “SampleID” field hasn’t been discussed yet, but it’s exactly what it
+The “SampleID” field wasn’t discussed yet, but it’s exactly what it
 sounds like! It must be unique, and it must match what you’ve called
-your samples in your sequencing data.
+your samples in your sequencing data. (If you use this package, it’s
+highly recommended that you call your sample IDs field exactly
+“SampleID” in both your metadata and ASV count table objects.)
 
 You may also notice that there’s some missing data (the NAs), which
 we’ll talk about more later.
@@ -130,8 +133,8 @@ In this made up toy example, we did 16S sequencing targeting the V4
 region (following [the Kozich et al. 2013
 protocol](https://journals.asm.org/doi/10.1128/aem.01043-13)) on these
 nasal swabs, then processed the sequencing data through
-[dada2](https://benjjneb.github.io/dada2/). The output we get from dada2
-is:
+[dada2](https://benjjneb.github.io/dada2/). The output we got from dada2
+was:
 
 1.  An [ASV (amplicon sequencing variant) count
     table](https://benjjneb.github.io/dada2/) and  
@@ -204,63 +207,15 @@ ASV table, and its taxonomy table) at once:
 
 ``` r
 
-all <- makeExample()
+all <- makeExample() # OR all <- makeExample("all")
 
-# OR
+str(all, 1)
+#> List of 3
+#>  $ metadata: tibble [9 × 6] (S3: tbl_df/tbl/data.frame)
+#>  $ asvtable: tibble [9 × 10] (S3: tbl_df/tbl/data.frame)
+#>  $ taxa    : tibble [9 × 8] (S3: tbl_df/tbl/data.frame)
 
-all <- makeExample("all")
-
-all
-#> $metadata
-#> # A tibble: 9 × 6
-#>   SampleID    SampleType       HealthStatus   Age Sex    Location
-#>   <chr>       <chr>            <chr>        <dbl> <chr>  <chr>   
-#> 1 HC1         nasal swab       healthy         48 female <NA>    
-#> 2 HC2         nasal swab       healthy         32 male   urban   
-#> 3 HC3         nasal swab       healthy         24 female urban   
-#> 4 Sick1       nasal swab       sick            42 male   rural   
-#> 5 Sick2       nasal swab       sick            50 male   urban   
-#> 6 Sick3       nasal swab       sick            45 male   rural   
-#> 7 Sick4       nasal swab       sick            40 female urban   
-#> 8 NegControl1 negative control <NA>            NA <NA>   <NA>    
-#> 9 PosControl1 positive control <NA>            NA <NA>   <NA>    
-#> 
-#> $asvtable
-#> # A tibble: 9 × 10
-#>   SampleID  TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
-#>   <chr>                      <dbl>                  <dbl>                  <dbl>
-#> 1 HC1                         1856                  11652                  13681
-#> 2 HC2                        25732                   4775                   2902
-#> 3 HC3                         3385                   6760                   6184
-#> 4 Sick1                      29939                  26217                  18965
-#> 5 Sick2                      29954                  16142                   9656
-#> 6 Sick3                      29724                   2771                  26380
-#> 7 Sick4                          1                      2                      0
-#> 8 NegContr…                      1                      1                      0
-#> 9 PosContr…                  10000                  10000                  10000
-#> # ℹ abbreviated names:
-#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
-#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
-#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
-#> # ℹ 6 more variables:
-#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
-#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
-#> 
-#> $taxa
-#> # A tibble: 9 × 8
-#>   ASV                            Kingdom Phylum Class Order Family Genus Species
-#>   <chr>                          <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>  
-#> 1 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
-#> 2 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Prev… melani…
-#> 3 TACGTAGGTGGCAAGCGTTATCCGGAATT… Bacter… Firmi… Baci… Stap… Staph… Stap… <NA>   
-#> 4 TACGGAGGGTGCGAGCGTTAATCGGAATA… Bacter… Prote… Gamm… Past… Paste… Haem… <NA>   
-#> 5 TACGTAGGTCCCGAGCGTTGTCCGGATTT… Bacter… Firmi… Baci… Lact… Strep… Stre… <NA>   
-#> 6 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… rava   
-#> 7 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>   
-#> 8 TACGAAGGGTGCAAGCGTTACTCGGAATT… Bacter… Prote… Gamm… Xant… Xanth… Sten… <NA>   
-#> 9 TACGGAAGGTCCAGGCGTTATCCGGATTT… Bacter… Bacte… Bact… Bact… Prevo… Allo… <NA>
-
-# Object "all" is a list, so, for example you can access (and assign, if you want) each tibble with the $ operator:
+# Object "all" is a list, so, you can access (and assign, if you want) each tibble with the $ operator:
 
 metadata <- all$metadata
 asvtable <- all$asvtable
@@ -285,7 +240,7 @@ checkMeta(metadata)
 
 You’ll see there’s a warning that NAs were detected in the metadata
 table. This is not bad or wrong, and it’s OK to have NAs! The warning is
-there to check *with you* that you were expecting to see some missing
+there to check *with you* that *you* were expecting to see some missing
 data. If you weren’t, check that your metadata object was loaded in
 correctly.
 
@@ -296,8 +251,8 @@ In this case, there are NAs in a few spots:
     samples.  
 2.  Location is missing for the participant that sample “HC1” was taken
     from. Let’s say that the participant declined to share their
-    location, so that’s why it’s missing from our data. With real life
-    data, it’s pretty normal to have some information missing.
+    geographic location, so that’s why it’s missing from our data. With
+    real life data, it’s pretty normal to have some information missing.
 
 This is all fine and there are no glaring red flags with our metadata
 object.
@@ -308,6 +263,14 @@ OK, now let’s check on ASV and taxonomy tables:
 
 checkASV(asvtable, taxa, metadata)
 ```
+
+## Placeholder
+
+This is for me to remember to add to this document:
+
+Add “bad” examples.  
+identifyNegs and assessNegs.  
+filtering. calcBetaDiv.
 
 ------------------------------------------------------------------------
 
