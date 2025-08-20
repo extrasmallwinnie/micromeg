@@ -313,8 +313,8 @@ checkASV(asvtable, taxa, metadata)
 
 # Acknowledgements
 
-As mentioned above, I could not have created this without the benefit of
-what others have already created. These tools below were especially
+As mentioned above, I could not have done any of this without the
+benefit of what the work of others. These tools below were especially
 important:
 
 - [mothur](https://mothur.org)  
@@ -325,7 +325,7 @@ important:
 - [tidyverse](https://tidyverse.tidyverse.org), especially
   [dplyr](https://dplyr.tidyverse.org) and
   [ggplot2](https://ggplot2.tidyverse.org). In addition to these
-  packages, Hadley Wickham and his team have written several extremely
+  packages, Hadley Wickham and team have written several extremely
   helpful [guides and tutorials](https://hadley.nz) on data science.
 - [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
 - [Suite from Dr. Frank Harrell](https://hbiostat.org), especially
