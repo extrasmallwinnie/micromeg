@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `micromeg` is to document and share convenience functions I use frequently for microbiome data analysis and processing. This package does not create any brand new functionatlity and was built on the great work of others. Many of the functions it provides already exist in other packages. For example, `[phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)` provides many similar tools, and is very well-documented and commonly used (I use it myself!) and so may be better for your purposes.    
+The goal of `micromeg` is to document and share convenience functions I use frequently for microbiome data analysis and processing. This package does not create any brand new functionatlity and was built on the great work of others. Many of the functions it provides already exist in other packages. For example, [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html) provides many similar tools, and is very well-documented and commonly used (I use it myself!) and so may be better for your purposes.    
     
 Other R packages heavily used here include:    
 1. [tidyverse](https://tidyverse.tidyverse.org) ecosystem   
@@ -44,9 +44,9 @@ I've listed the steps that I usually take with 16S data, some of which will be d
 
 1. Do the lab work to extract DNA, make libraries, submit for sequencing, etc. Both negative and positive controls are very important! Why, and what are those? Read more here: ^[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),^ ^[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),^ ^[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),^ ^[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),^ ^[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)^        
 2. Get the data from the sequencing core.   
-3. Process the data through [dada2](https://benjjneb.github.io/dada2/) then [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) to generate a cleaned [ASV (amplicon sequencing variant) table and a taxonomy table](https://www.nature.com/articles/nmeth.3869).   
+3. Process the data through [dada2](https://benjjneb.github.io/dada2/) then [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html) to generate a cleaned [ASV (amplicon sequencing variant) count table and its associated taxonomy table](https://www.nature.com/articles/nmeth.3869).   
 4. Create a "metadata" file with pertinent information on the samples and controls in your run. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
-5. Do some basic sanity checking on the metadata, ASV, and taxonomy objects. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data).   
+5. Do some basic sanity checking on the metadata, ASV, and taxonomy objects. [Jump to example &darr;](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data)    
 6. Check the quality of the sequencing data by examining both the positive and negative controls, and additionally how the controls compare to your real samples.      
 7. Alpha diversity (vegan).   
 8. Beta diversity (vegan).   
@@ -147,16 +147,16 @@ checkMeta(metadata)
 
 ```
 
-You'll see there's a warning that NAs were detected in the metadata table. This is not bad or wrong, and it's OK to have NAs! The warning is there to check *with you* that *you* were expecting to see some missing data. If you weren't, check that your metadata object was loaded in correctly.    
+You'll see there's a warning that NAs were detected in the metadata table. This is not bad or wrong, and it's OK to have NAs! The warning is there to check with *you* that *you* were expecting to see some missing data. If you weren't, check that your metadata object was loaded in correctly.    
 
 In this case, there are NAs in a few spots:
 
-1. Demographic data is missing for the lab positive and negative controls, as that kind of information not relevant for those samples.    
-2. Location is missing for the participant that sample "HC1" was taken from. Let's say that the participant declined to share their geographic location, so that's why it's missing from our data. With real life data, it's pretty normal to have some information missing.    
+1. Demographic data is "missing" for the lab positive and negative controls, as that kind of information not relevant for those samples.    
+2. Location is missing for the participant that sample "HC1" was taken from. Let's say that the participant declined to share their geographic location, so it is indeed truly missing. With real life data, it's pretty normal to have some information missing. People much smarter than I am have [written](https://hbiostat.org/rmsc/missing.html) [extensively](https://link.springer.com/chapter/10.1007/978-1-4757-3462-1_3) [about](https://pubmed.ncbi.nlm.nih.gov/20338724/) [missing](https://www.appliedmissingdata.com) [data](https://pubmed.ncbi.nlm.nih.gov/17401454/), and how to deal with it, so that won't be discussed much more here.       
 
 This is all fine and there are no glaring red flags with our metadata object.
 
-
+___
 
 OK, now let's check on ASV and taxonomy tables:
 
@@ -171,10 +171,10 @@ checkASV(asvtable, taxa, metadata)
 
 This is for me to remember to add to this document:    
 
-Add "bad" examples.   
-identifyNegs and assessNegs.   
-filtering.
-calcBetaDiv.   
+Add "bad" examples.       
+identifyNegs and assessNegs.       
+filtering.     
+calcBetaDiv.       
 
 
 ___
@@ -191,6 +191,7 @@ As mentioned above, I could not have done any of this without the benefit of wha
 * [vegan](https://cran.r-project.org/web/packages/vegan/index.html)
 * [tidyverse](https://tidyverse.tidyverse.org), especially [dplyr](https://dplyr.tidyverse.org) and [ggplot2](https://ggplot2.tidyverse.org). In addition to these packages, Hadley Wickham and team have written several extremely helpful [guides and tutorials](https://hadley.nz) on data science.
 * [dada2 and decontam](https://callahanlab.cvm.ncsu.edu/software/)
-* [Suite from Dr. Frank Harrell](https://hbiostat.org), especially [rms](https://cran.r-project.org/web/packages/rms/index.html) and [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).   
+* [Suite from Dr. Frank Harrell](https://hbiostat.org), especially [rms](https://cran.r-project.org/web/packages/rms/index.html) and [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
+* Colleague and physician-scientist [Dr. Christian Rosas-Salazar](https://pediatrics.vumc.org/person/christian-rosas-salazar-md-mph) is talented at many things, but has a knack for creating figures that are both beautiful and informative.   
 
 More acknowledgements and more details to be added later

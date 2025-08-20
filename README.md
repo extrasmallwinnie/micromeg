@@ -12,7 +12,7 @@ use frequently for microbiome data analysis and processing. This package
 does not create any brand new functionatlity and was built on the great
 work of others. Many of the functions it provides already exist in other
 packages. For example,
-`[phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)`
+[phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 provides many similar tools, and is very well-documented and commonly
 used (I use it myself!) and so may be better for your purposes.
 
@@ -59,14 +59,15 @@ will be demonstrated below with some made up data.
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
     [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
-    to generate a cleaned [ASV (amplicon sequencing variant) table and a
-    taxonomy table](https://www.nature.com/articles/nmeth.3869).  
+    to generate a cleaned [ASV (amplicon sequencing variant) count table
+    and its associated taxonomy
+    table](https://www.nature.com/articles/nmeth.3869).  
 4.  Create a “metadata” file with pertinent information on the samples
     and controls in your run. [Jump to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
 5.  Do some basic sanity checking on the metadata, ASV, and taxonomy
     objects. [Jump to example
-    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data).  
+    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data)  
 6.  Check the quality of the sequencing data by examining both the
     positive and negative controls, and additionally how the controls
     compare to your real samples.  
@@ -240,22 +241,31 @@ checkMeta(metadata)
 
 You’ll see there’s a warning that NAs were detected in the metadata
 table. This is not bad or wrong, and it’s OK to have NAs! The warning is
-there to check *with you* that *you* were expecting to see some missing
+there to check with *you* that *you* were expecting to see some missing
 data. If you weren’t, check that your metadata object was loaded in
 correctly.
 
 In this case, there are NAs in a few spots:
 
-1.  Demographic data is missing for the lab positive and negative
+1.  Demographic data is “missing” for the lab positive and negative
     controls, as that kind of information not relevant for those
     samples.  
 2.  Location is missing for the participant that sample “HC1” was taken
     from. Let’s say that the participant declined to share their
-    geographic location, so that’s why it’s missing from our data. With
-    real life data, it’s pretty normal to have some information missing.
+    geographic location, so it is indeed truly missing. With real life
+    data, it’s pretty normal to have some information missing. People
+    much smarter than I am have
+    [written](https://hbiostat.org/rmsc/missing.html)
+    [extensively](https://link.springer.com/chapter/10.1007/978-1-4757-3462-1_3)
+    [about](https://pubmed.ncbi.nlm.nih.gov/20338724/)
+    [missing](https://www.appliedmissingdata.com)
+    [data](https://pubmed.ncbi.nlm.nih.gov/17401454/), and how to deal
+    with it, so that won’t be discussed much more here.
 
 This is all fine and there are no glaring red flags with our metadata
 object.
+
+------------------------------------------------------------------------
 
 OK, now let’s check on ASV and taxonomy tables:
 
@@ -270,7 +280,8 @@ This is for me to remember to add to this document:
 
 Add “bad” examples.  
 identifyNegs and assessNegs.  
-filtering. calcBetaDiv.
+filtering.  
+calcBetaDiv.
 
 ------------------------------------------------------------------------
 
@@ -294,5 +305,9 @@ important:
 - [Suite from Dr. Frank Harrell](https://hbiostat.org), especially
   [rms](https://cran.r-project.org/web/packages/rms/index.html) and
   [Hmisc](https://cran.r-project.org/web/packages/Hmisc/index.html).
+- Colleague and physician-scientist [Dr. Christian
+  Rosas-Salazar](https://pediatrics.vumc.org/person/christian-rosas-salazar-md-mph)
+  is talented at many things, but has a knack for creating figures that
+  are both beautiful and informative.
 
 More acknowledgements and more details to be added later
