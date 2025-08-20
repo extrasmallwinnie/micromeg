@@ -51,7 +51,7 @@ will be demonstrated below with some made up data.
     sequencing, etc. Both positive and negative controls are very
     important! Why? Read more here:
     <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
-    [2](https://pubmed.ncbi.nlm.nih.gov/27239228/),
+    <sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
     [3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y).  
 2.  Get your data from your sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
