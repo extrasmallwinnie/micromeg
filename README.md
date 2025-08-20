@@ -50,7 +50,7 @@ will be demonstrated below with some made up data.
 1.  Do the lab work to extract DNA, make libraries, submit for
     sequencing, etc. Both positive and negative controls are very
     important! Why? Read more here:
-    [1](https://pubmed.ncbi.nlm.nih.gov/25387460/),
+    <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
     [2](https://pubmed.ncbi.nlm.nih.gov/27239228/),
     [3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y).  
 2.  Get your data from your sequencing core.  
