@@ -23,9 +23,9 @@ Other R packages heavily used here include:
 4. [maaslin3](https://huttenhower.sph.harvard.edu/maaslin3/)
 
 I started my career in microbiome research at the bench and had to
-[ELI5](https://www.dictionary.com/e/slang/eli5/) to myself how to
-process and analyze “big data”. I’ve spent a ton of time poring over and
-experimenting with [others’
+[ELI5](https://reactiongifs.me/explain-like-im-5-the-office/) to myself
+how to process and analyze “big data”. I’ve spent a ton of time poring
+over and experimenting with [others’
 code](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
 Likely, the ideal candidate to benefit from `micromeg` would be another
 bench scientist without much formal statistics or bioinformatics
