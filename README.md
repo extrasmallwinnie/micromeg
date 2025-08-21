@@ -7,10 +7,10 @@
 
 <!-- badges: end -->
 
-The goal of `micromeg` is to document and share convenience functions I
-use frequently for microbiome data analysis and processing. This package
-does not create any brand new functionality and was built on the great
-work of
+The goal of `micromeg` is to document and share convenience functions
+I’ve created that I use frequently for microbiome data analysis and
+processing. This package does not create any brand new functionality and
+was built on the great work of
 [others](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
 Much of what it does can be accomplished with other packages. For
 example,
@@ -78,10 +78,18 @@ will be demonstrated below with some made up data.
 8.  Beta diversity (vegan).  
 9.  Differential abundance (maaslin3).
 
-### Toy Example
+### Step 1: the lab work
+
+I’m not going to get into much detail here,
 
 First, load in a very simple example to get an idea for the format of
 what’s expected and the general processing flow.
+
+### Step 2: Sequencing
+
+### Step 3: Data processing
+
+### Step 4: Metadata
 
 #### Load in example data
 
@@ -247,6 +255,8 @@ metadata <- all$metadata
 asvtable <- all$asvtable
 taxa     <- all$taxa
 ```
+
+### Step 4: Sanity check
 
 #### Sanity check the data
 
@@ -450,7 +460,9 @@ checkASV(asvtable, taxa, badmetadata)
 
 Since R can’t figuere out how to match the samples from the metadata and
 ASV objects, you won’t be able to do any actual analysis with your
-metadata. This would need to be fixed before moving on. \_\_\_
+metadata. This would need to be fixed before moving on.
+
+### Step 6: Quality check
 
 #### Quality check the data
 
