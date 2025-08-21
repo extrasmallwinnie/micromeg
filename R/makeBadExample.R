@@ -7,16 +7,13 @@
 #'
 #' @examples
 #' makeBadExample("meta")
-makeBadExample <- function(...){
-
-  if(...=="meta" | ...=="metadata"){
+makeBadExample <- function(...) {
+  if (... == "meta" | ... == "metadata") {
     meta <- makeExampleMeta()
-    metaNoSampleID <- meta %>% rename(ID=.data$SampleID)
+    metaNoSampleID <- meta %>% rename(ID = .data$SampleID)
     return(metaNoSampleID)
   }
 
   temp <- makeExample(...)
   return(temp)
 }
-
-

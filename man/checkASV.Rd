@@ -21,7 +21,7 @@ Check your ASV count and taxonomy tables for potential issues.
 }
 \examples{
 asvtable <- makeExample("asv")
-taxa     <- makeExample("taxa")
+taxa <- makeExample("taxa")
 metadata <- makeExample("meta")
 checkASV(asvtable, taxa, metadata)
 }

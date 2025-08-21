@@ -85,7 +85,6 @@ library(micromeg)
 metadata <- makeExample("metadata")
 
 metadata
-
 ```
 
 This metadata object is a tibble (because I personally prefer the [tidyverse grammar](https://www.tmwr.org/tidyverse)), but data frames should also be fine to use. If you use my tools, everything will end up getting \~ tibblefied \~ anyway.     
@@ -114,7 +113,6 @@ asvtable
 Finally, let's load in the example taxonomy file. This was generated during the dada2 workflow, and must match the ASV table.
 
 ```{r taxaexample}
-
 taxa <- makeExample("taxa")
 
 taxa
@@ -125,17 +123,15 @@ The ASV "names" are the literal sequences of the amplicons, so they're super lon
 You can be lazy and make all three example tibbles (metadata, ASV table, and its taxonomy table) at once:
 
 ```{r allexample2}
-
 all <- makeExample() # OR all <- makeExample("all")
 
-str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
+str(all, max.level = 1) # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 
 # Object "all" is a list, so, you can access (and assign, if you want) each tibble with the $ operator:
 
 metadata <- all$metadata
 asvtable <- all$asvtable
-taxa     <- all$taxa
-
+taxa <- all$taxa
 ```
 
 ### Step 4: Sanity check
@@ -147,10 +143,7 @@ Now that we've loaded in our main objects (metadata, ASV counts, ASV taxonomy) w
 First, let's check the metadata object: 
 
 ```{r metacheck}
-
 checkMeta(metadata)
-
-
 ```
 
 You'll see there's a warning that NAs were detected in the metadata table. This is not bad or wrong, and it's OK to have NAs! The warning is there to check with *you* that *you* were expecting to see some missing data. If you weren't, check that your metadata object was loaded in correctly.    
@@ -169,22 +162,17 @@ ___
 OK, now let's also check on the ASV and taxonomy tables:
 
 ```{r asvcheck}
-
 checkASV(asvtable, taxa, metadata)
-
-
 ```
 
 Since we didn't get any warnings from checkASV(), our three objects all passed my sanity checks. That isn't super helpful as an example, so instead, let's deliberately make some "bad" ASV count tables that will throw a warning with these checks:
 
 ```{r badcheck}
-
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
 
 badasv1
 
 checkASV(badasv1, taxa, metadata)
-
 ```
 
 This is the least "bad" warning to get. We got a warning that no column named "SampleID" was found in the ASV count table. You don't *have* to follow this convention, but to use this package, it will make things much easier if you do. 

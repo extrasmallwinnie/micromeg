@@ -1,3 +1,3 @@
-detector <- function(x){
+detector <- function(x) {
 
 }

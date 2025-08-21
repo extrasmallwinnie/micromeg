@@ -10,16 +10,14 @@
 #' @examples
 #' asvtable <- makeExampleSeqtab()
 #' calcBetaDiv(asvtable, 400, "bray")
-calcBetaDiv <- function(asvtable, numRare = 400, method="bray"){
+calcBetaDiv <- function(asvtable, numRare = 400, method = "bray") {
+  minlibrary <- min(rowSums(asvtable[-1]))
 
-  minlibrary<-min(rowSums(asvtable[-1]))
-
-  if(numRare>0) {
+  if (numRare > 0) {
     rarefactions <- lapply(as.list(1:numRare), function(x) vegan::rrarefy(asvtable[-1], minlibrary))
-    braycurtis <- lapply(rarefactions, function(x) vegan::vegdist(x, method=method, binary=TRUE))
-    averagedbc<-Reduce("+", braycurtis) / length(braycurtis)
+    braycurtis <- lapply(rarefactions, function(x) vegan::vegdist(x, method = method, binary = TRUE))
+    averagedbc <- Reduce("+", braycurtis) / length(braycurtis)
   } else {
-    averagedbc <- vegan::vegdist(asvtable[-1], method=method, binary=TRUE)
+    averagedbc <- vegan::vegdist(asvtable[-1], method = method, binary = TRUE)
   }
-
 }

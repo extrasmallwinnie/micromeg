@@ -205,7 +205,6 @@ Finally, let’s load in the example taxonomy file. This was generated
 during the dada2 workflow, and must match the ASV table.
 
 ``` r
-
 taxa <- makeExample("taxa")
 
 taxa
@@ -234,10 +233,9 @@ You can be lazy and make all three example tibbles (metadata, ASV table,
 and its taxonomy table) at once:
 
 ``` r
-
 all <- makeExample() # OR all <- makeExample("all")
 
-str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
+str(all, max.level = 1) # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 #> List of 3
 #>  $ metadata: tibble [12 × 6] (S3: tbl_df/tbl/data.frame)
 #>  $ asvtable: tibble [12 × 10] (S3: tbl_df/tbl/data.frame)
@@ -247,7 +245,7 @@ str(all, max.level=1)  # if you're really new to R, FYI, str() is an inbuilt R f
 
 metadata <- all$metadata
 asvtable <- all$asvtable
-taxa     <- all$taxa
+taxa <- all$taxa
 ```
 
 ### Step 4: Sanity check
@@ -260,7 +258,6 @@ taxonomy) we will do some basic sanity checks on these three objects.
 First, let’s check the metadata object:
 
 ``` r
-
 checkMeta(metadata)
 #> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 6
 #> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
@@ -305,7 +302,6 @@ different type of warning you can get.)
 OK, now let’s also check on the ASV and taxonomy tables:
 
 ``` r
-
 checkASV(asvtable, taxa, metadata)
 ```
 
@@ -315,7 +311,6 @@ instead, let’s deliberately make some “bad” ASV count tables that will
 throw a warning with these checks:
 
 ``` r
-
 badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
 
 badasv1

@@ -4,7 +4,7 @@ test_that("Get a warning if NAs are detected", {
 
 test_that("Get a warning if your sample IDs are not all unique", {
   expect_warning(checkMeta(dplyr::storms, "name"))
-  })
+})
 
 test_that("Get a warning if the column name you gave for the sample IDs can't be found", {
   expect_warning(checkMeta(dplyr::storms, "nameee"))

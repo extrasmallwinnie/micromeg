@@ -8,26 +8,26 @@
 #' @examples
 #' metadata <- makeExample("meta")
 #' asvtable <- makeExample("asv")
-#' taxa     <- makeExample("taxa")
-#' all      <- makeExample()   # OR:
-#' all      <- makeExample("all")
-makeExample <- function(what=NULL){
-  if(is.null(what)){
+#' taxa <- makeExample("taxa")
+#' all <- makeExample() # OR:
+#' all <- makeExample("all")
+makeExample <- function(what = NULL) {
+  if (is.null(what)) {
     return(list("metadata" = makeExampleMeta(), "asvtable" = makeExampleSeqtab(), "taxa" = makeExampleTaxa()))
   }
-  if(is.null(what) | what=="all"){
+  if (is.null(what) | what == "all") {
     return(list("metadata" = makeExampleMeta(), "asvtable" = makeExampleSeqtab(), "taxa" = makeExampleTaxa()))
   }
-  if(what=="meta" | what=="metadata"){
+  if (what == "meta" | what == "metadata") {
     return(makeExampleMeta())
-    }
-  if(what=="asv" | what=="asvtable" | what=="seqtab"){
+  }
+  if (what == "asv" | what == "asvtable" | what == "seqtab") {
     return(makeExampleSeqtab())
-    }
-  if(what=="taxa" | what=="taxonomy"){
+  }
+  if (what == "taxa" | what == "taxonomy") {
     return(makeExampleTaxa())
-    }
-  if(what != "meta" & what != "metadata" & what != "asv" & what != "asvtable" & what != "seqtab" & what != "taxa" & what != "taxonomy" & what != "all" & !is.null(what)){
+  }
+  if (what != "meta" & what != "metadata" & what != "asv" & what != "asvtable" & what != "seqtab" & what != "taxa" & what != "taxonomy" & what != "all" & !is.null(what)) {
     stop("Valide options are 'all', 'meta' or 'metadata', 'asv' or 'asvtable' or 'seqtab', or 'taxa' or 'taxonomy'.")
-    }
+  }
 }

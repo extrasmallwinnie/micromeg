@@ -9,6 +9,6 @@
 #'
 #' @examples
 #' packItUp(makeExample()$metadata, makeExample()$asvtable, makeExample()$taxa)
-packItUp <- function(metadata=NULL, asvtable=NULL, taxa=NULL){
+packItUp <- function(metadata = NULL, asvtable = NULL, taxa = NULL) {
   return(list("metadata" = metadata, "asvtable" = asvtable, "taxa" = taxa))
 }

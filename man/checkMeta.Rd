@@ -19,8 +19,9 @@ Check your metadata file to identify potential downstream issues.
 }
 \examples{
 metadata <- data.frame(
-                       SampleIDs = c("Sample1", "Sample2", "Sample3"),
-                       Age       = c(34, 58, 21),
-                       Health    = c("Healthy", "Sick", NA))
+  SampleIDs = c("Sample1", "Sample2", "Sample3"),
+  Age       = c(34, 58, 21),
+  Health    = c("Healthy", "Sick", NA)
+)
 checkMeta(metadata, "SampleIDs")
 }
