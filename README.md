@@ -304,12 +304,10 @@ checkASV(exampleASVtable, exampleTaxa, exampleMetadata)
 
 Since we didn’t get any warnings from checkASV(), our three objects all
 passed my sanity checks. That isn’t super helpful as an example, so
-instead, let’s deliberately make some “bad” ASV count tables that will
-throw a warning with these checks:
+instead, let’s look at some included examples of “bad” ASV tables that
+will give warnings with the sanity checks:
 
 ``` r
-badasv1 <- makeBadExampleASV("ids") # changes name of 'SampleID' column to 'ID'
-
 badasv1
 #> # A tibble: 12 × 10
 #>    ID       TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
@@ -403,14 +401,13 @@ a different input object.
 Let’s move on to much more serious problems.
 
 ``` r
-badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table
 
 checkASV(badasv2, exampleTaxa, exampleMetadata)
 #> Warning in checkASV(badasv2, exampleTaxa, exampleMetadata): The number of ASVs
 #> in your ASV table doesn't match the number of ASVs in your taxonomy table.
 ```
 
-In this case, one of the ASVs was removed from the count table, so now
+In this case, one of the ASVs was deleted from the count table, so now
 the number of ASVs in the count table doesn’t match the number in the
 taxonomy table. If this happens with your data, you’ll need to check
 that you’re using the correct data and that nothing happened to corrupt
@@ -419,17 +416,18 @@ it. You may need to re-run dada2 (or whatever workflow you used).
 Next, a similar example of something that can go wrong:
 
 ``` r
-badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else
 
 checkASV(badasv3, exampleTaxa, exampleMetadata)
 #> Warning in checkASV(badasv3, exampleTaxa, exampleMetadata): The names of your
 #> ASVs in your ASV table don't match the names in the taxonomy table.
 ```
 
-Like the previous example, this represents another mismatch between the
-ASV count and taxonomy tables. Again, if this were to happen with your
-data, make sure you’re using the correct data and that it’s not messed
-up somehow. Re-run the data processing steps if necessary.
+One of the ASV names in the count table was changed, so it no longer
+matches its name in the taxonomy table. Like the previous example, this
+represents a different type of mismatch between the ASV count and
+taxonomy tables. Again, if this were to happen with your real data, make
+sure you’re using the correct dataset and that something didn’t get
+messed up somehow. Re-run the data processing steps if necessary.
 
 Finally, one more example of something that can go wrong is that there’s
 no match in the SampleIDs in the metadata and ASV count objects. Maybe
@@ -437,9 +435,9 @@ you used a different number of padding zeroes, or got the wrong file
 somewhere.
 
 ``` r
-badmetadata <- makeBadExampleMeta("wrongmeta") # adds a zero to the SampleIDs in the metadata object
-checkASV(exampleASVtable, exampleTaxa, badmetadata)
-#> Warning in checkASV(exampleASVtable, exampleTaxa, badmetadata): After merging
+
+checkASV(exampleASVtable, exampleTaxa, badmetadata1)
+#> Warning in checkASV(exampleASVtable, exampleTaxa, badmetadata1): After merging
 #> your metadata and ASV objects, no samples were retained. Check that the
 #> SampleIDs match in each object. For example, you may have a non-matching number
 #> of padded zeroes.
