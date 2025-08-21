@@ -10,8 +10,10 @@
 The goal of `micromeg` is to document and share convenience functions I
 use frequently for microbiome data analysis and processing. This package
 does not create any brand new functionality and was built on the great
-work of others. Many of its functions already exist in other packages.
-For example,
+work of
+\[others\]((<https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements>).
+Much of what it does can be accomplished with other packages. For
+example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
 provides many similar tools, and is very well-documented and commonly
 used (I use it myself!) and so may be better for your purposes.
@@ -76,12 +78,12 @@ will be demonstrated below with some made up data.
 8.  Beta diversity (vegan).  
 9.  Differential abundance (maaslin3).
 
-## Toy Example
+### Toy Example
 
 First, load in a very simple example to get an idea for the format of
 what’s expected and the general processing flow.
 
-### Load in example data
+#### Load in example data
 
 I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
@@ -91,7 +93,7 @@ collection, sex, and a simplified location category (in this case,
 (two extraction and two PCR negative controls) and one lab positive
 control containing a known mock community of bacteria.
 
-#### Metadata
+##### Metadata
 
 Let’s load the example metadata object into our session as an object
 called “metadata”:
@@ -133,7 +135,7 @@ highly recommended that you call your sample IDs field exactly
 You may also notice that there’s some missing data (the NAs), which
 we’ll talk about more later.
 
-#### ASV count and taxonomy tables
+##### ASV count and taxonomy tables
 
 In this made up toy example, we did 16S sequencing targeting the V4
 region (following [the Kozich et al. 2013
@@ -246,7 +248,7 @@ asvtable <- all$asvtable
 taxa     <- all$taxa
 ```
 
-### Sanity check the data
+#### Sanity check the data
 
 Now that we’ve loaded in our main objects (metadata, ASV counts, ASV
 taxonomy) we will do some basic sanity checks on these three objects.
@@ -450,7 +452,7 @@ Since R can’t figuere out how to match the samples from the metadata and
 ASV objects, you won’t be able to do any actual analysis with your
 metadata. This would need to be fixed before moving on. \_\_\_
 
-### Quality check the data
+#### Quality check the data
 
 Since we’re done with the basic sanity checks and the original objects
 `metadata`, `asvtable`, and `taxa` all looked good, now we can do an
@@ -460,7 +462,7 @@ As mentioned previously, lab positive and negative controls are VERY
 important and should be included at minimum in every single sequencing
 run.
 
-#### An aside to pontificate on negative controls
+##### An aside to pontificate on negative controls
 
 Negative controls are especially important with 16S data due the nature
 of the process: 1) bacteria and their DNA are ubiquitous and can live
