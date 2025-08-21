@@ -106,7 +106,7 @@ control containing a known mock community of bacteria.
 
 This package includes an example data set.
 
-Let’s look at the example metadata object:
+Let’s look at the example metadata object `exampleMetadata`:
 
 ``` r
 library(micromeg)
@@ -164,10 +164,10 @@ first follow the tutorials
 as they very nicely describe how to use them and the considerations you
 should have for your own data.
 
-Next, let’s looks at the example ASV count table. (N.B.: The data
-doesn’t necessarily strictly have to be an ASV table. Any sort of data
-in tabular format, e.g., OTU table, similar to the example **should**
-work.)
+Next, let’s looks at the example ASV count table `exampleASVtable`.
+(N.B.: The data doesn’t necessarily strictly have to be an ASV table.
+Any sort of data in tabular format, e.g., OTU table, similar to the
+example **should** work.)
 
 ``` r
 
@@ -196,8 +196,8 @@ exampleASVtable
 #> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 ```
 
-Finally, let’s look at the example taxonomy file. This was also
-generated during the dada2 workflow, and must match the ASV table.
+Finally, let’s look at the example taxonomy file `exampleTaxa`. This was
+also generated during the dada2 workflow, and must match the ASV table.
 
 ``` r
 
@@ -235,10 +235,10 @@ str(exampleData, max.level = 1) # if you're really new to R, FYI, str() is an in
 #>  $ taxa    : tibble [9 × 8] (S3: tbl_df/tbl/data.frame)
 ```
 
-At this point in the tutorial, the existence of all the example in a
-single list isn’t that helpful yet, but will become more so later. Later
-on, I’ll demonstrate a function that you can use to list-ify your own
-data in a similar manner. This will allow you to have to type less,
+At this point in the tutorial, the existence of all the example objects
+in a single list isn’t that helpful yet, but will become more so later.
+Later on, I’ll demonstrate a function that you can use to list-ify your
+own data in a similar manner. This will allow you to have to type less,
 which is always nice.
 
 ### Step 5: Sanity check
