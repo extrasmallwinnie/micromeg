@@ -401,40 +401,105 @@ a different input object.
 Let’s move on to much more serious problems.
 
 ``` r
+badasv2
+#> # A tibble: 12 × 8
+#>    SampleID TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
+#>    <chr>                     <dbl>                  <dbl>                  <dbl>
+#>  1 HC1                        1856                  11652                  13681
+#>  2 HC2                       25732                   4775                   2902
+#>  3 HC3                        3385                   6760                   6184
+#>  4 Sick1                     29939                  26217                  18965
+#>  5 Sick2                     29954                  16142                   9656
+#>  6 Sick3                     29724                   2771                  26380
+#>  7 Sick4                         1                      2                      0
+#>  8 ExtNegC…                     12                      5                     10
+#>  9 ExtNegC…                     10                      3                      2
+#> 10 PCRNegC…                      0                      2                      0
+#> 11 PCRNegC…                      1                      1                      1
+#> 12 PosCont…                  10005                 100024                  10036
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCTGGGCTTAACCTAGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG,
+#> #   ²​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ³​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 4 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 
 checkASV(badasv2, exampleTaxa, exampleMetadata)
 #> Warning in checkASV(badasv2, exampleTaxa, exampleMetadata): The number of ASVs
 #> in your ASV table doesn't match the number of ASVs in your taxonomy table.
 ```
 
-In this case, one of the ASVs was deleted from the count table, so now
-the number of ASVs in the count table doesn’t match the number in the
-taxonomy table. If this happens with your data, you’ll need to check
-that you’re using the correct data and that nothing happened to corrupt
-it. You may need to re-run dada2 (or whatever workflow you used).
+In this case, two of the ASVs were accidentally deleted somehow from the
+count table (you may have noticed it says “\# A tibble: 12 x 8” instead
+of “…12 x 10”), so now the number of ASVs in the count table doesn’t
+match the number in the taxonomy table. If this were to happen with your
+data, you’ll need to check that you’re using the correct dataset and
+that nothing happened to corrupt it. You may need to re-run dada2 (or
+whatever workflow you used).
 
 Next, a similar example of something that can go wrong:
 
 ``` r
+badasv3
+#> # A tibble: 12 × 10
+#>    SampleID        ATCG TACGGAAGGTCCAGGCGTTATCCGGATTTAT…¹ TACGTAGGTGGCAAGCGTTA…²
+#>    <chr>          <dbl>                             <dbl>                  <dbl>
+#>  1 HC1             1856                             11652                  13681
+#>  2 HC2            25732                              4775                   2902
+#>  3 HC3             3385                              6760                   6184
+#>  4 Sick1          29939                             26217                  18965
+#>  5 Sick2          29954                             16142                   9656
+#>  6 Sick3          29724                              2771                  26380
+#>  7 Sick4              1                                 2                      0
+#>  8 ExtNegControl1    12                                 5                     10
+#>  9 ExtNegControl2    10                                 3                      2
+#> 10 PCRNegControl1     0                                 2                      0
+#> 11 PCRNegControl2     1                                 1                      1
+#> 12 PosControl1    10005                            100024                  10036
+#> # ℹ abbreviated names:
+#> #   ¹​TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCTGGAGATTAAGTGTGTTGTGAAATGTAGACGCTCAACGTCTGAATTGCAGCGCATACTGGTTTCCTTGAGTACGCACAACGTTGGCGGAATTCGTCGTGTAGCGGTGAAATGCTTAGATATGACGAAGAACTCCGATTGCGAAGGCAGCTGACGGGAGCGCAACTGACGCTTAAGCTCGAAGGTGCGGGTATCAAACAGG,
+#> #   ²​TACGTAGGTGGCAAGCGTTATCCGGAATTATTGGGCGTAAAGCGCGCGTAGGCGGTTTTTTAAGTCTGATGTGAAAGCCCACGGCTCAACCGTGGAGGGTCATTGGAAACTGGAAAACTTGAGTGCAGAAGAGGAAAGTGGAATTCCATGTGTAGCGGTGAAATGCGCAGAGATATGGAGGAACACCAGTGGCGAAGGCGACTTTCTGGTCTGTAACTGACGCTGATGTGCGAAAGCGTGGGGATCAAACAGG
+#> # ℹ 6 more variables:
+#> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>,
+#> #   TACGGAAGGTCCAGGCGTTATCCGGATTTATTGGGTTTAAAGGGAGCGTAGGCGGACGATTAAGTCAGCTGTGAAAGTTTGCGGCTCAACCGTAAAATTGCAGTTGAAACTGGTTGTCTTGAGTGCACGCAGGGATGTTGGAATTCATGGTGTAGCGGTGAAATGCTTAGATATCATGAAGAACTCCGATCGCGAAGGCATATGTCTGGAGTGCAACTGACGCTGAGGCTCGAAAGTGCGGGTATCGAACAGG <dbl>, …
 
 checkASV(badasv3, exampleTaxa, exampleMetadata)
 #> Warning in checkASV(badasv3, exampleTaxa, exampleMetadata): The names of your
 #> ASVs in your ASV table don't match the names in the taxonomy table.
 ```
 
-One of the ASV names in the count table was changed, so it no longer
-matches its name in the taxonomy table. Like the previous example, this
-represents a different type of mismatch between the ASV count and
-taxonomy tables. Again, if this were to happen with your real data, make
-sure you’re using the correct dataset and that something didn’t get
-messed up somehow. Re-run the data processing steps if necessary.
+One of the ASV names in the count table was accidentally changed
+somehow, so it no longer matches its name in the taxonomy table. Like
+the previous example, this represents a different type of mismatch
+between the ASV count and taxonomy tables. Again, if this were to happen
+with your real data, make sure you’re using the correct dataset and that
+something didn’t get messed up somehow. Re-run the data processing steps
+if necessary.
 
 Finally, one more example of something that can go wrong is that there’s
-no match in the SampleIDs in the metadata and ASV count objects. Maybe
-you used a different number of padding zeroes, or got the wrong file
-somewhere.
+no match in the SampleIDs between the metadata and ASV count objects.
+Maybe you used a different number of padding zeroes, or loaded the wrong
+file somewhere?
 
 ``` r
+badmetadata1
+#> # A tibble: 12 × 6
+#>    SampleID        SampleType       HealthStatus   Age Sex    Location
+#>    <chr>           <chr>            <chr>        <dbl> <chr>  <chr>   
+#>  1 HC10            nasal swab       healthy         48 female <NA>    
+#>  2 HC20            nasal swab       healthy         32 male   urban   
+#>  3 HC30            nasal swab       healthy         24 female urban   
+#>  4 Sick10          nasal swab       sick            42 male   rural   
+#>  5 Sick20          nasal swab       sick            50 male   urban   
+#>  6 Sick30          nasal swab       sick            45 male   rural   
+#>  7 Sick40          nasal swab       sick            40 female urban   
+#>  8 ExtNegControl10 negative control <NA>            NA <NA>   <NA>    
+#>  9 ExtNegControl20 negative control <NA>            NA <NA>   <NA>    
+#> 10 PCRNegControl10 negative control <NA>            NA <NA>   <NA>    
+#> 11 PCRNegControl20 negative control <NA>            NA <NA>   <NA>    
+#> 12 PosControl10    positive control <NA>            NA <NA>   <NA>
 
 checkASV(exampleASVtable, exampleTaxa, badmetadata1)
 #> Warning in checkASV(exampleASVtable, exampleTaxa, badmetadata1): After merging

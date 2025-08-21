@@ -208,24 +208,27 @@ Great, we're all set. You can also use checkSampleID() on the metadata object; t
 Let's move on to much more serious problems.
 
 ```{r badcheck2.0, eval=TRUE}
+badasv2
 
 checkASV(badasv2, exampleTaxa, exampleMetadata)
 ```
 
-In this case, one of the ASVs was deleted from the count table, so now the number of ASVs in the count table doesn't match the number in the taxonomy table. If this happens with your data, you'll need to check that you're using the correct data and that nothing happened to corrupt it. You may need to re-run dada2 (or whatever workflow you used).    
+In this case, two of the ASVs were accidentally deleted somehow from the count table (you may have noticed it says "# A tibble: 12 x 8" instead of "...12 x 10"), so now the number of ASVs in the count table doesn't match the number in the taxonomy table. If this were to happen with your data, you'll need to check that you're using the correct dataset and that nothing happened to corrupt it. You may need to re-run dada2 (or whatever workflow you used).    
 
 Next, a similar example of something that can go wrong:
 
 ```{r badcheck3.0}
+badasv3
 
 checkASV(badasv3, exampleTaxa, exampleMetadata)
 ```
 
-One of the ASV names in the count table was changed, so it no longer matches its name in the taxonomy table. Like the previous example, this represents a different type of mismatch between the ASV count and taxonomy tables. Again, if this were to happen with your real data, make sure you're using the correct dataset and that something didn't get messed up somehow. Re-run the data processing steps if necessary.
+One of the ASV names in the count table was accidentally changed somehow, so it no longer matches its name in the taxonomy table. Like the previous example, this represents a different type of mismatch between the ASV count and taxonomy tables. Again, if this were to happen with your real data, make sure you're using the correct dataset and that something didn't get messed up somehow. Re-run the data processing steps if necessary.
 
-Finally, one more example of something that can go wrong is that there's no match in the SampleIDs in the metadata and ASV count objects. Maybe you used a different number of padding zeroes, or got the wrong file somewhere.
+Finally, one more example of something that can go wrong is that there's no match in the SampleIDs between the metadata and ASV count objects. Maybe you used a different number of padding zeroes, or loaded the wrong file somewhere?
 
 ```{r badcheck4.0}
+badmetadata1
 
 checkASV(exampleASVtable, exampleTaxa, badmetadata1)
 ```
