@@ -60,7 +60,7 @@ will be demonstrated below with some made up data.
 2.  Get the data from the sequencing core.  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
-    [decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
+    [decontam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
     to generate a cleaned [ASV (amplicon sequencing variant) count table
     and its associated taxonomy
     table](https://www.nature.com/articles/nmeth.3869).  
@@ -481,7 +481,7 @@ sample buffer) per every extraction batch, and a PCR negative control
 for every PCR master mix batch.
 
 If you’ve processed your data through
-[decomtam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
+[decontam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
 or another such tool, you’ve already bioinformatically removed some
 potential contaminants. I’d recommend doing this as part of your
 workflow before data analysis.
