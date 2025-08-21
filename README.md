@@ -517,8 +517,8 @@ metadata. This would need to be fixed before moving on.
 #### Quality check the data
 
 Since we’re done with the basic sanity checks and the original objects
-`metadata`, `asvtable`, and `taxa` all looked good, now we can do an
-actual more interesting quality check of our data.
+`exampleMetadata`, `exampleASVtable`, and `exampleTaxa` all looked good,
+now we can do an actual more interesting quality check of our data.
 
 As mentioned previously, lab positive and negative controls are VERY
 important and should be included at minimum in every single sequencing

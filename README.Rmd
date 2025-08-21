@@ -239,7 +239,7 @@ Since R can't figure out how to match the samples from the metadata and ASV obje
 
 #### Quality check the data
 
-Since we're done with the basic sanity checks and the original objects `metadata`, `asvtable`, and `taxa` all looked good, now we can do an actual more interesting quality check of our data.    
+Since we're done with the basic sanity checks and the original objects `exampleMetadata`, `exampleASVtable`, and `exampleTaxa` all looked good, now we can do an actual more interesting quality check of our data.    
 
 As mentioned previously, lab positive and negative controls are VERY important and should be included at minimum in every single sequencing run.    
 
