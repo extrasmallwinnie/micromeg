@@ -11,7 +11,7 @@ The goal of `micromeg` is to document and share convenience functions I
 use frequently for microbiome data analysis and processing. This package
 does not create any brand new functionality and was built on the great
 work of
-\[others\]((<https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements>).
+[others](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
 Much of what it does can be accomplished with other packages. For
 example,
 [phyloseq](https://bioconductor.org/packages/release/bioc/html/phyloseq.html)
