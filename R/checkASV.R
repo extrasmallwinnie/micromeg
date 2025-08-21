@@ -21,7 +21,7 @@ checkASV <- function(asvtable, taxa, metadata){
       warning(sprintf("The names of your ASVs in your ASV table don't match the names in the taxonomy table."))
        }
     }
-  if(nrow(tibble::as_tibble(table(tibble::as_tibble(sapply(asvtable[-1], class)))))>1) {
+  if(all(sapply(asvtable[-1], is.numeric))==FALSE) {
     warning(sprintf("In your ASV table, not all columns (other than the SampleID) were identified as numeric. Check that you don't have anything that's not a number in your ASV count columns."))
   }
 
