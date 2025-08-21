@@ -56,24 +56,27 @@ will be demonstrated below with some made up data.
     <sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
     <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
     <sup>[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),</sup>
-    <sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>  
-2.  Get the data from the sequencing core.  
+    <sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>
+    [Go
+    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-1-the-lab-work)  
+2.  Get the data from the sequencing core. [Go
+    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-2-sequencing)  
 3.  Process the data through [dada2](https://benjjneb.github.io/dada2/)
     then
     [decontam](https://benjjneb.github.io/decontam/vignettes/decontam_intro.html)
     to generate a cleaned [ASV (amplicon sequencing variant) count table
     and its associated taxonomy
-    table](https://www.nature.com/articles/nmeth.3869).  
+    table](https://www.nature.com/articles/nmeth.3869). [Go ↓](↓)  
 4.  Create a “metadata” file with pertinent information on the samples
     and controls in your run. [Go to example
     ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#metadata)
 5.  Do some basic sanity checking on the metadata, ASV, and taxonomy
-    objects. [Go to example
-    ↓](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#sanity-check-the-data)  
+    objects. [Go
+    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-5-sanity-check)  
 6.  Check the quality of the sequencing data by examining both the
     positive and negative controls, and additionally how the controls
-    compare to your real samples. [Go to example
-    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#quality-check-the-data)  
+    compare to your real samples. [Go
+    ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-6-quality-check)  
 7.  Alpha diversity (vegan).  
 8.  Beta diversity (vegan).  
 9.  Differential abundance (maaslin3).
@@ -248,7 +251,7 @@ asvtable <- all$asvtable
 taxa <- all$taxa
 ```
 
-### Step 4: Sanity check
+### Step 5: Sanity check
 
 #### Sanity check the data
 
