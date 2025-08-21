@@ -7,10 +7,12 @@
 
 <!-- badges: end -->
 
-The goal of `micromeg` is to document and share convenience functions
-I’ve created that I use frequently for microbiome data analysis and
-processing. This package does not create any brand new functionality and
-was built on the great work of
+The goal of `micromeg` is to guide you through *my* typical microbiome
+16S pipeline, and to document and share convenience functions I’ve
+created for data analysis and processing.
+
+This package does not create any brand new functionality and was built
+on the great work of
 [others](https://github.com/extrasmallwinnie/micromeg/?tab=readme-ov-file#acknowledgements).
 Much of what it does can be accomplished with other packages. For
 example,
@@ -50,14 +52,7 @@ I’ve listed the steps that I usually take with 16S data, some of which
 will be demonstrated below with some made up data.
 
 1.  Do the lab work to extract DNA, make libraries, submit for
-    sequencing, etc. Both negative and positive controls are very
-    important! Why, and what are those? Read more here:
-    <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
-    <sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
-    <sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
-    <sup>[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),</sup>
-    <sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>
-    [Go
+    sequencing, etc. [Go
     ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-1-the-lab-work)  
 2.  Get the data from the sequencing core. [Go
     ↓](https://github.com/extrasmallwinnie/micromeg?tab=readme-ov-file#step-2-sequencing)  
@@ -83,10 +78,13 @@ will be demonstrated below with some made up data.
 
 ### Step 1: the lab work
 
-I’m not going to get into much detail here,
-
-First, load in a very simple example to get an idea for the format of
-what’s expected and the general processing flow.
+I’m not going to get into much detail here. More TBA. Both negative and
+positive controls are very important! Why, and what are those? Read more
+here: <sup>[1](https://pubmed.ncbi.nlm.nih.gov/25387460/),</sup>
+<sup>[2](https://pubmed.ncbi.nlm.nih.gov/27239228/),</sup>
+<sup>[3](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-020-01839-y),</sup>
+<sup>[4](https://bmcmicrobiol.biomedcentral.com/articles/10.1186/s12866-016-0738-z),</sup>
+<sup>[5](https://journals.asm.org/doi/10.1128/msystems.00062-16)</sup>
 
 ### Step 2: Sequencing
 
@@ -106,19 +104,14 @@ control containing a known mock community of bacteria.
 
 ##### Metadata
 
-The function makeExample() can be called with different types of input
-to create different example objects in R for the purposes of this
-tutorial.
+This package includes an example data set.
 
-Let’s load the example metadata object into our session as an object
-called “metadata”:
+Let’s look at the example metadata object:
 
 ``` r
 library(micromeg)
 
-metadata <- makeExample("metadata")
-
-metadata
+exampleMetadata
 #> # A tibble: 12 × 6
 #>    SampleID       SampleType       HealthStatus   Age Sex    Location
 #>    <chr>          <chr>            <chr>        <dbl> <chr>  <chr>   
@@ -171,15 +164,14 @@ first follow the tutorials
 as they very nicely describe how to use them and the considerations you
 should have for your own data.
 
-Next, let’s load in the example ASV count table. (N.B.: The data doesn’t
-necessarily strictly have to be an ASV table. Any sort of data in
-tabular format, e.g., OTU table, similar to the example **should**
+Next, let’s looks at the example ASV count table. (N.B.: The data
+doesn’t necessarily strictly have to be an ASV table. Any sort of data
+in tabular format, e.g., OTU table, similar to the example **should**
 work.)
 
 ``` r
-asvtable <- makeExample("asvtable")
 
-asvtable
+exampleASVtable
 #> # A tibble: 12 × 10
 #>    SampleID TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
 #>    <chr>                     <dbl>                  <dbl>                  <dbl>
@@ -204,13 +196,12 @@ asvtable
 #> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 ```
 
-Finally, let’s load in the example taxonomy file. This was generated
-during the dada2 workflow, and must match the ASV table.
+Finally, let’s look at the example taxonomy file. This was also
+generated during the dada2 workflow, and must match the ASV table.
 
 ``` r
-taxa <- makeExample("taxa")
 
-taxa
+exampleTaxa
 #> # A tibble: 9 × 8
 #>   ASV                            Kingdom Phylum Class Order Family Genus Species
 #>   <chr>                          <chr>   <chr>  <chr> <chr> <chr>  <chr> <chr>  
@@ -229,39 +220,39 @@ The ASV “names” are the literal sequences of the amplicons, so they’re
 super long when viewed in this format. The ASV names must match in the
 ASV count and taxonomy tables. It would be stupefyingly difficult and
 annoying for a human to manually verify that they do match, but it’s
-trivial for a computer. We will check that the ASV names do indeed match
-later.
+trivial for a computer to do so. We will check that the ASV names do
+indeed match later.
 
-You can be lazy and make all three example tibbles (metadata, ASV table,
-and its taxonomy table) at once:
+All three example objects are also packaged together as a single list as
+object `exampleData`:
 
 ``` r
-all <- makeExample() # OR all <- makeExample("all")
 
-str(all, max.level = 1) # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
+str(exampleData, max.level = 1) # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 #> List of 3
 #>  $ metadata: tibble [12 × 6] (S3: tbl_df/tbl/data.frame)
 #>  $ asvtable: tibble [12 × 10] (S3: tbl_df/tbl/data.frame)
 #>  $ taxa    : tibble [9 × 8] (S3: tbl_df/tbl/data.frame)
-
-# Object "all" is a list, so, you can access (and assign, if you want) each tibble with the $ operator:
-
-metadata <- all$metadata
-asvtable <- all$asvtable
-taxa <- all$taxa
 ```
+
+At this point in the tutorial, the existence of all the example in a
+single list isn’t that helpful yet, but will become more so later. Later
+on, I’ll demonstrate a function that you can use to list-ify your own
+data in a similar manner. This will allow you to have to type less,
+which is always nice.
 
 ### Step 5: Sanity check
 
 #### Sanity check the data
 
-Now that we’ve loaded in our main objects (metadata, ASV counts, ASV
-taxonomy) we will do some basic sanity checks on these three objects.
+Now that we’re more familiar with in our main objects (exampleMetadata,
+exampleASVtable, exampleTaxa) we will do some basic sanity checks on
+these three objects.
 
 First, let’s check the metadata object:
 
 ``` r
-checkMeta(metadata)
+checkMeta(exampleMetadata)
 #> Warning in checkMeta4(df, ids): As least 1 NA or empty cell was detected in 6
 #> sample(s) in your metadata object. This is not necessarily bad or wrong, but if
 #> you were not expecting this, check your metadata object again. Sample(s) HC1,
@@ -269,22 +260,25 @@ checkMeta(metadata)
 #> were detected to have NAs or empty cells.
 ```
 
-You’ll see there’s a warning that NAs were detected in the metadata
-table. This is not bad or wrong, and it’s OK to have NAs! The warning is
-there to check with *you* that *you* were expecting to see some missing
-data. If you weren’t, check that your metadata object was loaded in
-correctly.
+You’ll see there’s a warning message that NAs were detected in the
+metadata table. This is not bad or wrong, and it’s OK to have NAs! The
+warning is there to check with *you* that *you* were expecting to see
+some missing data. If you weren’t, check that your metadata object was
+loaded in correctly. (Sometimes there can be unexpected issues with line
+breaks or non-standard characters, for example, when loading a real
+metadata file into R.)
 
 In this case, there are NAs in a few spots:
 
 1.  Demographic data is “missing” for the lab positive and negative
     controls, as that kind of information is not
-    applicable/relevant/meaningful for those samples.  
+    applicable/relevant/meaningful for them.  
 2.  Location is missing from the participant for sample “HC1”. Let’s say
     that this participant declined to share their geographic location,
     so it is indeed truly missing. With real life data, it’s pretty
-    normal to have some information missing. People much smarter than I
-    am have [written](https://hbiostat.org/rmsc/missing.html)
+    normal to have some data not available for whatever reason. People
+    much smarter than I am have
+    [written](https://hbiostat.org/rmsc/missing.html)
     [extensively](https://link.springer.com/chapter/10.1007/978-1-4757-3462-1_3)
     [about](https://pubmed.ncbi.nlm.nih.gov/20338724/)
     [missing](https://www.appliedmissingdata.com)
@@ -297,7 +291,7 @@ object.
 (checkMeta takes two arguments; the first is your metadata object and
 the second is your sample IDs column. It’s set so that ‘SampleID’ is the
 default so we didn’t have to explicitly tell the function that. Try
-`checkMeta(metadata, "SampleType")` to see another example of a
+`checkMeta(exampleMetadata, "SampleType")` to see another example of a
 different type of warning you can get.)
 
 ------------------------------------------------------------------------
@@ -305,7 +299,7 @@ different type of warning you can get.)
 OK, now let’s also check on the ASV and taxonomy tables:
 
 ``` r
-checkASV(asvtable, taxa, metadata)
+checkASV(exampleASVtable, exampleTaxa, exampleMetadata)
 ```
 
 Since we didn’t get any warnings from checkASV(), our three objects all
@@ -340,9 +334,9 @@ badasv1
 #> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
 #> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 
-checkASV(badasv1, taxa, metadata)
-#> Warning in checkASV(badasv1, taxa, metadata): A column called 'SampleID' wasn't
-#> found in your ASV table 'badasv1'. It's recommended to run
+checkASV(badasv1, exampleTaxa, exampleMetadata)
+#> Warning in checkASV(badasv1, exampleTaxa, exampleMetadata): A column called
+#> 'SampleID' wasn't found in your ASV table 'badasv1'. It's recommended to run
 #> checkSampleID(badasv1) first.
 ```
 
@@ -399,21 +393,21 @@ badasv1_fixed
 #> #   TACGGAGGGTGCGAGCGTTAATCGGAATAACTGGGCGTAAAGGGCACGCAGGCGGTTATTTAAGTGAGGTGTGAAAGCCCCGGGCTTAACCTGGGAATTGCATTTCAGACTGGGTAACTAGAGTACTTTAGGGAGGGGTAGAATTCCACGTGTAGCGGTGAAATGCGTAGAGATGTGGAGGAATACCGAAGGCGAAGGCAGCCCCTTGGGAATGTACTGACGCTCATGTGCGAAAGCGTGGGGAGCAAACAGG <dbl>,
 #> #   TACGTAGGTCCCGAGCGTTGTCCGGATTTATTGGGCGTAAAGCGAGCGCAGGCGGTTAGATAAGTCTGAAGTTAAAGGCTGTGGCTTAACCATAGTAGGCTTTGGAAACTGTTTAACTTGAGTGCAAGAGGGGAGAGTGGAATTCCATGTGTAGCGGTGAAATGCGTAGATATATGGAGGAACACCGGTGGCGAAAGCGGCTCTCTGGCTTGTAACTGACGCTGAGGCTCGAAAGCGTGGGGAGCAAACAGG <dbl>, …
 
-checkASV(badasv1_fixed, taxa, metadata)
+checkASV(badasv1_fixed, exampleTaxa, exampleMetadata)
 ```
 
 Great, we’re all set. You can also use checkSampleID() on the metadata
-object; that’s not demonstrated here as it’s the same thing, just with a
-different input.
+object; that’s not demonstrated here as it’s the same process, just with
+a different input object.
 
 Let’s move on to much more serious problems.
 
 ``` r
 badasv2 <- makeBadExampleASV("remove") # removes one of the ASVs from the count table
 
-checkASV(badasv2, taxa, metadata)
-#> Warning in checkASV(badasv2, taxa, metadata): The number of ASVs in your ASV
-#> table doesn't match the number of ASVs in your taxonomy table.
+checkASV(badasv2, exampleTaxa, exampleMetadata)
+#> Warning in checkASV(badasv2, exampleTaxa, exampleMetadata): The number of ASVs
+#> in your ASV table doesn't match the number of ASVs in your taxonomy table.
 ```
 
 In this case, one of the ASVs was removed from the count table, so now
@@ -427,9 +421,9 @@ Next, a similar example of something that can go wrong:
 ``` r
 badasv3 <- makeBadExampleASV("rename") # replaces the name of one of the ASVs with something else
 
-checkASV(badasv3, taxa, metadata)
-#> Warning in checkASV(badasv3, taxa, metadata): The names of your ASVs in your
-#> ASV table don't match the names in the taxonomy table.
+checkASV(badasv3, exampleTaxa, exampleMetadata)
+#> Warning in checkASV(badasv3, exampleTaxa, exampleMetadata): The names of your
+#> ASVs in your ASV table don't match the names in the taxonomy table.
 ```
 
 Like the previous example, this represents another mismatch between the
@@ -444,13 +438,14 @@ somewhere.
 
 ``` r
 badmetadata <- makeBadExampleMeta("wrongmeta") # adds a zero to the SampleIDs in the metadata object
-checkASV(asvtable, taxa, badmetadata)
-#> Warning in checkASV(asvtable, taxa, badmetadata): After merging your metadata
-#> and ASV objects, no samples were retained. Check that the SampleIDs match in
-#> each object. For example, you may have a non-matching number of padded zeroes.
+checkASV(exampleASVtable, exampleTaxa, badmetadata)
+#> Warning in checkASV(exampleASVtable, exampleTaxa, badmetadata): After merging
+#> your metadata and ASV objects, no samples were retained. Check that the
+#> SampleIDs match in each object. For example, you may have a non-matching number
+#> of padded zeroes.
 ```
 
-Since R can’t figuere out how to match the samples from the metadata and
+Since R can’t figure out how to match the samples from the metadata and
 ASV objects, you won’t be able to do any actual analysis with your
 metadata. This would need to be fixed before moving on.
 
