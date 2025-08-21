@@ -4,7 +4,7 @@
 #' @param asvtable ASV count table object
 #' @param taxa Taxonomy table object
 #'
-#' @returns A list containing those three objects
+#' @returns A list containing the above three objects
 #' @export
 #'
 #' @examples

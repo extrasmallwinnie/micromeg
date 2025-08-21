@@ -14,7 +14,7 @@ packItUp(metadata = NULL, asvtable = NULL, taxa = NULL)
 \item{taxa}{Taxonomy table object}
 }
 \value{
-A list containing those three objects
+A list containing the above three objects
 }
 \description{
 Package up your three objects (metadata, asvtable, taxonomy table) into a single list for less typing

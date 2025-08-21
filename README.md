@@ -97,11 +97,15 @@ I’ve made up an example study where nasal swabs were taken from people
 who were either “healthy” or “sick” at the time of sampling. We’ve
 collected from each participant their health status, their age at
 collection, sex, and a simplified location category (in this case,
-‘rural’ or ‘urban’). There was also four total lab negative controls
+‘rural’ or ‘urban’). There were also four total lab negative controls
 (two extraction and two PCR negative controls) and one lab positive
 control containing a known mock community of bacteria.
 
 ##### Metadata
+
+The function makeExample() can be called with different types of input
+to create different example objects in R for the purposes of this
+tutorial.
 
 Let’s load the example metadata object into our session as an object
 called “metadata”:
@@ -109,7 +113,7 @@ called “metadata”:
 ``` r
 library(micromeg)
 
-metadata <- makeExampleMeta()
+metadata <- makeExample("metadata")
 
 metadata
 #> # A tibble: 12 × 6
@@ -170,7 +174,7 @@ tabular format, e.g., OTU table, similar to the example **should**
 work.)
 
 ``` r
-asvtable <- makeExampleSeqtab()
+asvtable <- makeExample("asvtable")
 
 asvtable
 #> # A tibble: 12 × 10
@@ -202,7 +206,7 @@ during the dada2 workflow, and must match the ASV table.
 
 ``` r
 
-taxa <- makeExampleTaxa()
+taxa <- makeExample("taxa")
 
 taxa
 #> # A tibble: 9 × 8
@@ -226,18 +230,8 @@ annoying for a human to manually verify that they do match, but it’s
 trivial for a computer. We will check that the ASV names do indeed match
 later.
 
-BTW, the function makeExample() also exists for your convenience and
-will call upon any of the above, like so:
-
-``` r
-
-metadata <- makeExample("meta")
-asvtable <- makeExample("asv")
-taxa     <- makeExample("taxa")
-```
-
-You can be even more lazy and make all three example tibbles (metadata,
-ASV table, and its taxonomy table) at once:
+You can be lazy and make all three example tibbles (metadata, ASV table,
+and its taxonomy table) at once:
 
 ``` r
 
