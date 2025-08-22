@@ -170,7 +170,6 @@ Any sort of data in tabular format, e.g., OTU table, similar to the
 example **should** work.)
 
 ``` r
-
 exampleASVtable
 #> # A tibble: 12 × 10
 #>    SampleID TACGGAGGGTGCGAGCGTTA…¹ TACGGAAGGTCCAGGCGTTA…² TACGTAGGTGGCAAGCGTTA…³
@@ -200,7 +199,6 @@ Finally, let’s look at the example taxonomy file `exampleTaxa`. This was
 also generated during the dada2 workflow, and must match the ASV table.
 
 ``` r
-
 exampleTaxa
 #> # A tibble: 9 × 8
 #>   ASV                            Kingdom Phylum Class Order Family Genus Species
@@ -227,7 +225,6 @@ All three example objects are also packaged together as a single list as
 object `exampleData`:
 
 ``` r
-
 str(exampleData, max.level = 1) # if you're really new to R, FYI, str() is an inbuilt R function that displays the STRucture of an R object, and I've set max.level to 1 so it will only display the first nested level (AKA, a minimal display here)
 #> List of 3
 #>  $ metadata: tibble [12 × 6] (S3: tbl_df/tbl/data.frame)

@@ -1,27 +1,36 @@
-checkAll <- function(x, ...){
-  if(nargs() != 1 & nargs() != 3){
-    stop(sprintf("The number of arguments to provide to this function must be either 3 (metadata, ASV count, ASV taxa objects) or 1 (a list containing those 3 objects). The number of arguments you provided was %s.", nargs()))
-  }
+checkAll <- function(x, ...) {
+  if (switcher(x, ...) == "packedUp") {
+    if (dplyr::setequal(names(x), c("metadata", "asvtable", "taxa"))) {
+      # metadata <- x$metadata
+      # asvtable <- x$asvtable
+      # taxa     <- x$taxa
+      return(x)
+    }
+    if (!dplyr::setequal(names(x), c("metadata", "asvtable", "taxa"))) {
+      asvtable <- for (i in x) {
+        # print(i)
+        if (isASVtable(i) == TRUE) {
+          return(i)
+        }
+      }
 
-  if(nargs() == 1 & class(x)[1] != "list"){
-    stop(sprintf("You only provided one argument, %s, but it is not a list. The number of arguments to provide to this function must be either 3 (metadata, ASV count, ASV taxa objects) or 1 (a list containing those 3 objects)", deparse(substitute(x))))
-  }
+      metadata <- for (i in x) {
+        # print(i)
+        if (isMeta(i) == TRUE) {
+          return(i)
+        }
+      }
 
-  if(nargs() == 1 & class(x)[1] == "list" & all(names(x) != c("metadata", "asvtable", "taxa"))){
-    stop(sprintf("The names of objects in your list do not match the expected convention. Use function packItUp() to create a list that will work with this package."))
-  }
+      taxa <- for (i in x) {
+        # print(i)
+        if (isTaxa(i) == TRUE) {
+          return(i)
+        }
+      }
 
-  if(nargs() == 1 & class(x)[1] == "list" & all(names(x) == c("metadata", "asvtable", "taxa"))){
-    metadata <- x$metadata
-    asvtable <- x$asvtable
-    taxa     <- x$taxa
-    #return(taxa)
-  }
-
-  if(nargs() == 3){
-    args <- list(...) # Convert ... to a list
-    for (arg in args) {
-      print(arg)
+      new_x <- packItUp(metadata, asvtable, taxa)
+      return(new_x)
+      # return(asvtable)
     }
   }
 }
