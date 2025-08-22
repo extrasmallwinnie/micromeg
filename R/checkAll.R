@@ -1,36 +1,30 @@
+#' Title
+#'
+#' @param x Objects to check (either a single list) or three objects
+#' @param ... can take a flexible number of arguments
+#'
+#' @returns something
+#' @export
+#'
+#'
+#' @examples
+#' checkAll(exampleData)
+#' checkAll(exampleMetadata, exampleASVtable, exampleTaxa)
 checkAll <- function(x, ...) {
   if (switcher(x, ...) == "packedUp") {
     if (dplyr::setequal(names(x), c("metadata", "asvtable", "taxa"))) {
-      # metadata <- x$metadata
-      # asvtable <- x$asvtable
-      # taxa     <- x$taxa
       return(x)
     }
     if (!dplyr::setequal(names(x), c("metadata", "asvtable", "taxa"))) {
-      asvtable <- for (i in x) {
-        # print(i)
-        if (isASVtable(i) == TRUE) {
-          return(i)
-        }
-      }
-
-      metadata <- for (i in x) {
-        # print(i)
-        if (isMeta(i) == TRUE) {
-          return(i)
-        }
-      }
-
-      taxa <- for (i in x) {
-        # print(i)
-        if (isTaxa(i) == TRUE) {
-          return(i)
-        }
-      }
-
-      new_x <- packItUp(metadata, asvtable, taxa)
-      return(new_x)
-      # return(asvtable)
+      return(renamePackedList(x))
     }
+  }
+
+  if (switcher(x, ...) == "notPackedUp" & nargs() != 3) {
+    stop("You must provide either three arguments (asvtable, taxa table, metadata) or one argument (a list containg those three).")
+  }
+
+  if (switcher(x, ...) == "notPackedUp" & nargs() == 3) {
+    print("get to this later")
   }
 }

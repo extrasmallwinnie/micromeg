@@ -1,3 +1,16 @@
+#' Title
+#'
+#' Not intended to be used by end user
+#'
+#'
+#' @param x list or set of arguments
+#' @param ... flexible
+#'
+#' @returns
+#' @export
+#'
+#' @examples
+#' switcher(exampleData)
 switcher <- function(x, ...) {
   numArgs <- nargs()
   firstClass <- class(x)[1]

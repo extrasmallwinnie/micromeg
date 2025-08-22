@@ -14,7 +14,13 @@ isMeta <- function(x) {
   all_numeric <- all(sapply(x[-1], is.numeric))
   first_column_character <- all(sapply(x[1], is.character))
 
-  if (all(!all_numeric, first_column_character)) {
+  not_restricted_taxa_names <- if (ncol(x) != 8) {
+    TRUE
+  } else {
+    all(names(x) != dada2TaxaNames())
+  }
+
+  if (all(!all_numeric, first_column_character, not_restricted_taxa_names)) {
     return(TRUE)
   } else {
     return(FALSE)
